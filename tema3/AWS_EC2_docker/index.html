@@ -1,0 +1,766 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../tema2/AWS_EC2/">
+      
+      
+        <link rel="next" href="../../tema6/AWS_CLI/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+    
+    
+      
+        <title>Docker en AWS - Zona AWS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aws-ec2-y-docker" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Zona AWS" class="md-header__button md-logo" aria-label="Zona AWS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Zona AWS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Docker en AWS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Zona AWS" class="md-nav__button md-logo" aria-label="Zona AWS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Zona AWS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/AWS_intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Intro AWS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/AWS_EC2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    EC2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Docker en AWS
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Docker en AWS
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-instalar-docker-en-ec2" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Instalar Docker en EC2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Instalar Docker en EC2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-instalacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Post-instalación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prueba
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-instalacion-con-script-o-desde-plantilla" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Instalación con script o desde plantilla
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-desplegar-imagen-con-servidor-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Desplegar imagen con servidor web
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#terminar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Terminar
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-usando-un-fichero-compose-y-scp" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Usando un fichero compose (y scp)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tu imagen en AWS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Traefik, AWS y SSL
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Ampliación
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Ampliación
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema6/AWS_CLI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS CLI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema7/AWS_ECR/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS ECR
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-instalar-docker-en-ec2" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Instalar Docker en EC2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Instalar Docker en EC2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-instalacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Post-instalación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prueba
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-instalacion-con-script-o-desde-plantilla" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Instalación con script o desde plantilla
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-desplegar-imagen-con-servidor-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Desplegar imagen con servidor web
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#terminar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Terminar
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-usando-un-fichero-compose-y-scp" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Usando un fichero compose (y scp)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="aws-ec2-y-docker">AWS, EC2 y Docker<a class="headerlink" href="#aws-ec2-y-docker" title="Permanent link">&para;</a></h1>
+<p>Se supone una instancia EC2 funcionando (ver prácticas previas) accesible mediante conexión ssh.</p>
+<h2 id="1-instalar-docker-en-ec2">1. Instalar Docker en EC2<a class="headerlink" href="#1-instalar-docker-en-ec2" title="Permanent link">&para;</a></h2>
+<p>La instalación de Docker en la instancia EC2 dependerá del Sistema Operativo. Puede usar el script que facilitan desde Docker. En este ejemplo se usa una instancia Debian:</p>
+<div class="highlight"><pre><span></span><code>admin@ip-172-31-55-39:~$ curl -fsSL https://get.docker.com -o get-docker.sh
+...
+admin@ip-172-31-55-39:~$ sudo sh get-docker.sh
+# Executing docker install script, commit: 66474034547a96caa0a25be56051ff8b726a1b28
+...
+admin@ip-172-31-55-39:~$
+</code></pre></div>
+<h3 id="post-instalacion">Post-instalación<a class="headerlink" href="#post-instalacion" title="Permanent link">&para;</a></h3>
+<p>Continue la instalación añadiendo el usuario de la instancia (<code>admin</code> en debian) al grupo <code>docker</code> y cerrando la conexión para que se reflejen los cambios (o ejecutar el comando <code>newgrp docker</code>).</p>
+<div class="highlight"><pre><span></span><code>admin@ip-172-31-55-39:~$sudo groupadd docker
+groupadd: group &#39;docker&#39; already exists
+admin@ip-172-31-55-39:~$ sudo usermod -aG docker $USER
+admin@ip-172-31-55-39:~$ newgrp docker
+admin@ip-172-31-55-39:~$
+</code></pre></div>
+<h3 id="prueba">Prueba<a class="headerlink" href="#prueba" title="Permanent link">&para;</a></h3>
+<p>Y pruebe el comando <code>docker</code>:</p>
+<div class="highlight"><pre><span></span><code>admin@ip-172-31-55-39:~$ docker run hello-world
+Unable to find image &#39;hello-world:latest&#39; locally
+latest: Pulling from library/hello-world
+2db29710123e: Pull complete 
+...
+Hello from Docker!
+...
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+admin@ip-172-31-55-39:~$
+</code></pre></div>
+<h2 id="2-instalacion-con-script-o-desde-plantilla">2. Instalación con script o desde plantilla<a class="headerlink" href="#2-instalacion-con-script-o-desde-plantilla" title="Permanent link">&para;</a></h2>
+<p>Es posible ejecutar un script al lanzar la instancia EC2, en el apartado <strong>"Detalles Avanzados"</strong>. En ese apartado tiene la opción de incluir <strong>"Datos de usuario"</strong>. Incluso puede crear previamente una  plantilla de lanzamiento con dicho script. </p>
+<p>En el caso de la instalación de docker en debian el script sería similar a</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+curl<span class="w"> </span>-fsSL<span class="w"> </span>https://get.docker.com<span class="w"> </span>-o<span class="w"> </span>get-docker.sh
+sudo<span class="w"> </span>sh<span class="w"> </span>get-docker.sh
+sudo<span class="w"> </span>groupadd<span class="w"> </span>docker
+sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span>admin
+</code></pre></div>
+<h2 id="3-desplegar-imagen-con-servidor-web">3. Desplegar imagen con servidor web<a class="headerlink" href="#3-desplegar-imagen-con-servidor-web" title="Permanent link">&para;</a></h2>
+<p>Pruebe a lanzar la imagen de un servidor <code>nginx</code> (redireccionando el puerto 80 del host al 80 del contenedor):</p>
+<div class="highlight"><pre><span></span><code>admin@ip-172-31-55-39:~$ docker run -d -p 80:80 --name web nginx
+...
+admin@ip-172-31-55-39:~$
+</code></pre></div>
+<p>Compruebe que esté funcionando el contenedor:</p>
+<div class="highlight"><pre><span></span><code>admin@ip-172-31-55-39:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                               NAMES
+3113d2a133ac   nginx     &quot;/docker-entrypoint.…&quot;   51 seconds ago   Up 50 seconds   0.0.0.0:80-&gt;80/tcp, :::80-&gt;80/tcp   web
+admin@ip-172-31-55-39:~$ 
+</code></pre></div>
+<p>Y pruebe el contenedor desde la propia instancia EC2:</p>
+<div class="highlight"><pre><span></span><code>admin@ip-172-31-55-39:~$ curl localhost
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+...
+&lt;/html&gt;
+admin@ip-172-31-55-39:~$ 
+</code></pre></div>
+<p>Termine probando el acceso desde el exterior (usando la IP o nombre público de la instancia EC2) con el comando <code>curl</code> o un navegador </p>
+<p><img alt="" src="../figuras/aws_12.png" /></p>
+<ul>
+<li>a la IP pública de la instancia:</li>
+</ul>
+<p><img alt="" src="../figuras/aws_13.png" /></p>
+<ul>
+<li>al nombre de la misma:</li>
+</ul>
+<p><img alt="" src="../figuras/aws_14.png" /></p>
+<h2 id="terminar">Terminar<a class="headerlink" href="#terminar" title="Permanent link">&para;</a></h2>
+<p>No olvide detener el contenedor (<code>docker rm -f web</code>), y si ha terminado detener (o terminar) la instancia EC2, cerrar la consola AWS y salir del laboratorio.</p>
+<h2 id="5-usando-un-fichero-compose-y-scp">5. Usando un fichero compose (y <code>scp</code>)<a class="headerlink" href="#5-usando-un-fichero-compose-y-scp" title="Permanent link">&para;</a></h2>
+<p>En el caso de que la aplicación a desplegar se configure en un fichero <code>compose.yml</code> el proceso sería:</p>
+<ol>
+<li>Copiar el fichero <code>docker-compose.yml</code> en la instancia EC2 con el comando <code>scp</code></li>
+<li>Desplegar con <code>docker compose up -d</code></li>
+<li>Comprobar el acceso a la aplicación</li>
+</ol>
+<p>Este podría ser un ejemplo de un fichero de despliegue (en este caso Wordpress)</p>
+<div class="highlight"><span class="filename">docker-compose.yml</span><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+
+<span class="w">  </span><span class="nt">wordpress</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wordpress</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080:80</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">WORDPRESS_DB_HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
+<span class="w">      </span><span class="nt">WORDPRESS_DB_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exampleuser</span>
+<span class="w">      </span><span class="nt">WORDPRESS_DB_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">examplepass</span>
+<span class="w">      </span><span class="nt">WORDPRESS_DB_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exampledb</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wordpress:/var/www/html</span>
+
+<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql:8.0</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">MYSQL_DATABASE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exampledb</span>
+<span class="w">      </span><span class="nt">MYSQL_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exampleuser</span>
+<span class="w">      </span><span class="nt">MYSQL_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">examplepass</span>
+<span class="w">      </span><span class="nt">MYSQL_RANDOM_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;1&#39;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db:/var/lib/mysql</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">wordpress</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

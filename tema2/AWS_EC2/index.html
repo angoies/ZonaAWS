@@ -1,0 +1,824 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../tema1/AWS_intro/">
+      
+      
+        <link rel="next" href="../../tema3/AWS_EC2_docker/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+    
+    
+      
+        <title>EC2 - Zona AWS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aws-y-ec2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Zona AWS" class="md-header__button md-logo" aria-label="Zona AWS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Zona AWS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              EC2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Zona AWS" class="md-nav__button md-logo" aria-label="Zona AWS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Zona AWS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/AWS_intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Intro AWS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    EC2
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    EC2
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-abrir-la-consola-aws-desde-lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Abrir la consola AWS desde Lab
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-crear-instancia-ec2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Crear instancia EC2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-conexion-ssh-a-la-instancia-ec2" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Conexión ssh a la instancia EC2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-instalar-servidor-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Instalar servidor web
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-detener-las-instancias" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Detener las instancias
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-script-en-lanzamiento-de-la-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Script en lanzamiento de la instancia
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-plantillas-de-lanzamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Plantillas de lanzamiento
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-ip-elastica" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. IP elástica
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. DNS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-uso-del-comando-scp" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Uso del comando scp
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-ejercicio-desplegar-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Ejercicio: Desplegar web
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema3/AWS_EC2_docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker en AWS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tu imagen en AWS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Traefik, AWS y SSL
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Ampliación
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Ampliación
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema6/AWS_CLI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS CLI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema7/AWS_ECR/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS ECR
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-abrir-la-consola-aws-desde-lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Abrir la consola AWS desde Lab
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-crear-instancia-ec2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Crear instancia EC2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-conexion-ssh-a-la-instancia-ec2" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Conexión ssh a la instancia EC2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-instalar-servidor-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Instalar servidor web
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-detener-las-instancias" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Detener las instancias
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-script-en-lanzamiento-de-la-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Script en lanzamiento de la instancia
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-plantillas-de-lanzamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Plantillas de lanzamiento
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-ip-elastica" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. IP elástica
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. DNS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-uso-del-comando-scp" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Uso del comando scp
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-ejercicio-desplegar-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Ejercicio: Desplegar web
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="aws-y-ec2">AWS y EC2<a class="headerlink" href="#aws-y-ec2" title="Permanent link">&para;</a></h1>
+<p>Práctica de creación de uan instancia EC2 en AWS</p>
+<h2 id="1-abrir-la-consola-aws-desde-lab">1. Abrir la consola AWS desde Lab<a class="headerlink" href="#1-abrir-la-consola-aws-desde-lab" title="Permanent link">&para;</a></h2>
+<p>Tiene enlaces en el tema de introducción de cómo hacerlo. Acceder a AWS Academy, luego al Learner Lab, etc.</p>
+<h2 id="2-crear-instancia-ec2">2. Crear instancia EC2<a class="headerlink" href="#2-crear-instancia-ec2" title="Permanent link">&para;</a></h2>
+<p>Tiene como referencia este vídeo <a href="https://www.youtube.com/watch?v=cX80gnEHs_E&amp;list=PLr35b7rSarzizDIWK4eKyl6mY4V_HxERi&amp;index=7">cómo crear un instancia EC2</a> en AWS Academy. </p>
+<p>Los pasos a dar son:</p>
+<ol>
+<li>Seleccionar una imagen  de la capa gratuita (en este ejemplo se usa Debian, pero podría usarse Ubuntu o una AMI Linux de AWS).</li>
+<li>Seleccionar un tipo de instancia de la capa gratuita. </li>
+<li>
+<p>Usar el par de claves de inicio de sesión <code>vockey</code> (accesibles en la plataforma de <em>Learner Lab</em> en "AWS Details")
+    <img alt="" src="../../figuras/aws_01_vockey.png" /></p>
+</li>
+<li>
+<p>Crear un grupo de seguridad que permita trafico ssh, HTTP y HTTPS (se puede modificar posteriormente),</p>
+</li>
+<li>Dejar el almacenamiento por defecto </li>
+<li>Lanzar la instancia. </li>
+</ol>
+<p>En la consola AWS puede comprobar el estado de la instancia y sus detalles, en particular su nombre  e IP públicos. También se puede acceder al grupo de seguridad creado, etc.</p>
+<blockquote>
+<p>Nota: puede que le resulte más cómodo trabajar con un par de claves creadas (previamente o en el momento de lanzar la instancia). En este caso al usar Linux se usa el formato pem y tipo ED255129. Al pulsar el botón "Crear par de claves" se descarga el fichero con la clave privada creada que usará luego para la conexión ssh.</p>
+</blockquote>
+<h2 id="3-conexion-ssh-a-la-instancia-ec2">3. Conexión <code>ssh</code> a la instancia EC2<a class="headerlink" href="#3-conexion-ssh-a-la-instancia-ec2" title="Permanent link">&para;</a></h2>
+<p>Desde el panel de la instancia en ejecución puede usar el botón "Conectar" y acceder a la información de cómo conectarse a la instancia. </p>
+<p>En el caso de ssh hay una pestaña con instrucciones y el comando necesario. </p>
+<h2 id="4-instalar-servidor-web">4. Instalar servidor web<a class="headerlink" href="#4-instalar-servidor-web" title="Permanent link">&para;</a></h2>
+<p>Para instalar un servidor web debe estar conectado a la instancia con ssh. Una vez conectado puede instalar <code>nginx-light</code> o <code>nginx</code> (o <code>httpd</code>):</p>
+<div class="highlight"><pre><span></span><code>admin@ip-172-31-50-215:~$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+admin@ip-172-31-50-215:~$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>nginx
+admin@ip-172-31-50-215:~$<span class="w"> </span>
+</code></pre></div>
+<p>Puede probar el servidor en la propia instancia EC2 con <code>curl</code> </p>
+<div class="highlight"><pre><span></span><code>admin@ip-172-31-50-215:~$<span class="w"> </span>curl<span class="w"> </span>localhost
+&lt;!DOCTYPE<span class="w"> </span>html&gt;
+&lt;html&gt;
+....
+&lt;p&gt;&lt;em&gt;Thank<span class="w"> </span>you<span class="w"> </span><span class="k">for</span><span class="w"> </span>using<span class="w"> </span>nginx.&lt;/em&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+admin@ip-172-31-50-215:~$
+</code></pre></div>
+<p>Puede probar el acceso externo con un navegador usando la IP pública (o el nombre público) de la instancia. Tenga en cuenta que sólo podpuede acceder mediante HTTP (no https).</p>
+<h2 id="5-detener-las-instancias">5. Detener las instancias<a class="headerlink" href="#5-detener-las-instancias" title="Permanent link">&para;</a></h2>
+<p>Una vez terminado el ejercicio no olvide:</p>
+<ol>
+<li><strong>Detener</strong> las instancias. </li>
+<li>Si no son necesarias posteriormente <strong>Terminarlas</strong>.</li>
+<li>Cerrar la sesión en la consola AWS.</li>
+<li>Detener el laboratorio en el  <em>Learner Lab</em>.</li>
+</ol>
+<h2 id="6-script-en-lanzamiento-de-la-instancia">6. Script en lanzamiento de la instancia<a class="headerlink" href="#6-script-en-lanzamiento-de-la-instancia" title="Permanent link">&para;</a></h2>
+<p>Se podría haber realizado la instalación del servidor web mediante un script en el momento de crear la instancia. El lugar para incluir estos scripts es el apartado <strong>"Detalles Avanzados"</strong> durante el lanzamiento de la imagen. En ese apartado está la opción de incluir <strong>"Datos de usuario"</strong>. Tiene maś información en este enlace: <a href="https://docs.aws.amazon.com/es_es/AWSEC2/latest/UserGuide/user-data.html">https://docs.aws.amazon.com/es_es/AWSEC2/latest/UserGuide/user-data.html</a></p>
+<p>El script podría ser similar a este (dependerá de la imagen elegida y de la aplicación a instalar):</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>nginx
+</code></pre></div>
+<p>El script dependerá del sistema operativo de la imagen elegida. En el caso de la imagen de AWS el gestor de paquetes es <code>yum</code> y sería algo similar a </p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+sudo<span class="w"> </span>yum<span class="w"> </span>update<span class="w"> </span>-y
+sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>httpd<span class="w"> </span>-y
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>httpd
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>httpd
+</code></pre></div>
+<h2 id="7-plantillas-de-lanzamiento">7. Plantillas de lanzamiento<a class="headerlink" href="#7-plantillas-de-lanzamiento" title="Permanent link">&para;</a></h2>
+<p>En AWS Academy, una plantilla de lanzamiento (launch template) es un recurso que define la configuración para lanzar instancias de EC2, incluyendo la AMI, el tipo de instancia, el par de claves, los grupos de seguridad y otros parámetros. Permite estandarizar y simplificar el proceso de creación de instancias.</p>
+<p>En este caso es posible incluir el script de instalación en la plantilla.  Tiene maś información en este enlace: <a href="https://docs.aws.amazon.com/es_es/AWSEC2/latest/UserGuide/user-data.html">https://docs.aws.amazon.com/es_es/AWSEC2/latest/UserGuide/user-data.html</a>.</p>
+<h2 id="8-ip-elastica">8. IP elástica<a class="headerlink" href="#8-ip-elastica" title="Permanent link">&para;</a></h2>
+<p>Las IP asignadas a las instancias (y sus nombres) no son fijos, cambian al detener o reiniciar la instancia EC2. Por lo tanto si detiene la instancia y la arranca más tarde la IP y su nombre asociado pueden cambiar.</p>
+<p>Para evitarlo se puede usar una IP <strong>elástica</strong>, pero <strong>tenga en cuenta que tendrá coste aunque la instancia EC2 esté detenida</strong>. </p>
+<p>Puede consultar estos recursos:</p>
+<ul>
+<li>Vídeo explicando uso IP elástica: <a href="https://www.youtube.com/watch?v=trZLt2jJp4c">https://www.youtube.com/watch?v=trZLt2jJp4c</a></li>
+<li>Docs AWS sobre IP elástica: <a href="https://docs.aws.amazon.com/es_es/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html?icmpid=docs_ec2_console">https://docs.aws.amazon.com/es_es/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html?icmpid=docs_ec2_console</a></li>
+</ul>
+<h2 id="9-dns">9. DNS<a class="headerlink" href="#9-dns" title="Permanent link">&para;</a></h2>
+<p>Por otra parte podría querer usar una dominio propio para su instancia EC2. Tiene entre otras las siguientes opciones gratuitas:</p>
+<ul>
+<li>Dynu: https://www.dynu.com/</li>
+<li>Duckdns: https://www.duckdns.org/</li>
+<li><a href="https://www.gnutomorrow.com/best-free-dynamic-dns-services/">Listado de opciones gratuitas</a></li>
+</ul>
+<p>Deberá asociar en el dominio creado la IP elástica de AWS. </p>
+<h2 id="10-uso-del-comando-scp">10. Uso del comando scp<a class="headerlink" href="#10-uso-del-comando-scp" title="Permanent link">&para;</a></h2>
+<p>Si tiene en su equipo local su sitio web comprimido puede subirlo a la instancia EC2 con el comando <code>scp</code> cómo se indica en<br />
+<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/linux-file-transfer-scp.html">Transfer files to a Linux instance using SCP</a></p>
+<p>En este ejemplo podría ser:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Format orden scp local -&gt; AWS</span>
+<span class="c1"># scp -i key-pair-name.pem /path/my-file ec2-user@instance-public-dns-name:path/</span>
+clases@vm$<span class="w"> </span>scp<span class="w"> </span>-i<span class="w"> </span>vockey.pem<span class="w"> </span><span class="m">2048</span>.zip<span class="w"> </span>admin@ip-172-31-50-215:
+</code></pre></div>
+<p>Y ya desde desde la instancia EC2 (en el caso de nginx):</p>
+<div class="highlight"><pre><span></span><code>admin@ip-172-31-50-215:~$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/var/www/html/
+admin@ip-172-31-50-215:~$<span class="w"> </span>sudo<span class="w"> </span>rm<span class="w"> </span>index*.html
+admin@ip-172-31-50-215:~$<span class="w"> </span>sudo<span class="w"> </span>unzip<span class="w"> </span>/home/admin/2048.zip
+</code></pre></div>
+<h2 id="11-ejercicio-desplegar-web">11. Ejercicio: Desplegar web<a class="headerlink" href="#11-ejercicio-desplegar-web" title="Permanent link">&para;</a></h2>
+<p>Como ejercicio puede desplegar un sitio web ya creado previamente (disponible  en un fichero comprimido). Para ello:</p>
+<ul>
+<li>Debe acceder al directorio por defecto del servidor, en el caso de <code>ningx</code> el directorio  <code>/var/www/html</code></li>
+<li>Borrar el fichero índice </li>
+<li>Descomprimir el fichero comprimido</li>
+</ul>
+<p>Algo similar a </p>
+<div class="highlight"><pre><span></span><code>admin@ip-172-31-50-215:~$<span class="w"> </span>wget<span class="w"> </span>https://sanvalero-static-webs.s3.eu-west-1.amazonaws.com/breakout.zip
+admin@ip-172-31-50-215:~$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/var/www/html/
+admin@ip-172-31-50-215:~$<span class="w"> </span>sudo<span class="w"> </span>rm<span class="w"> </span>index.nginx-debian.html
+admin@ip-172-31-50-215:~$<span class="w"> </span>sudo<span class="w"> </span>unzip<span class="w"> </span>/home/admin/breakout.zip
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
