@@ -998,32 +998,32 @@
 <p>Para llegar a la solución final se darán tres pasos usando los ficheros <code>traefik.vxX.yml</code> (v1, v2 y v3).</p>
 <p>En el primer paso se configura traefik, el servicio whoami y SSL. En esta versión whoami sólo es accesible mediante https usando los  certificados proporcionados por <strong>Let's Encrypt</strong>. </p>
 <p>Primero observe la configuración del servicio <code>traefik</code> donde se han añadido opciones respecto a ejemplos previos en <code>ports</code>, <code>command</code> y <code>volumes</code></p>
-<div class="highlight"><pre><span></span><code>services:
-  traefik:
-    image: &quot;traefik:v3.3&quot;
-    command:
-      - &quot;--log.level=DEBUG&quot;  # se incrementa el nivel de log
-      - &quot;--api.insecure=true&quot;
-      - &quot;--providers.docker=true&quot;
-      - &quot;--providers.docker.exposedbydefault=false&quot;
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">traefik</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;traefik:v3.3&quot;</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;--log.level=DEBUG&quot;</span><span class="w">  </span><span class="c1"># se incrementa el nivel de log</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;--api.insecure=true&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;--providers.docker=true&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;--providers.docker.exposedbydefault=false&quot;</span>
 
-      # Para SSL
-      - &quot;--entryPoints.websecure.address=:443&quot;
-      - &quot;--certificatesresolvers.myresolver.acme.tlschallenge=true&quot;
-      # - &quot;--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory&quot;
-      - &quot;--certificatesresolvers.myresolver.acme.email=profesor@midominio.com&quot;
-      - &quot;--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json&quot;
+<span class="w">      </span><span class="c1"># Para SSL</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;--entryPoints.websecure.address=:443&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;--certificatesresolvers.myresolver.acme.tlschallenge=true&quot;</span>
+<span class="w">      </span><span class="c1"># - &quot;--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;--certificatesresolvers.myresolver.acme.email=profesor@midominio.com&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json&quot;</span>
 
-    ports:
-      - &quot;443:443&quot;   # HTTPS 
-      - &quot;8080:8080&quot; # The Web UI 
-    volumes:
-      # Volumen para certificado
-      - &quot;./letsencrypt:/letsencrypt&quot;  
-      - &quot;/var/run/docker.sock:/var/run/docker.sock:ro&quot;
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;443:443&quot;</span><span class="w">   </span><span class="c1"># HTTPS </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8080:8080&quot;</span><span class="w"> </span><span class="c1"># The Web UI </span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># Volumen para certificado</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;./letsencrypt:/letsencrypt&quot;</span><span class="w">  </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/var/run/docker.sock:/var/run/docker.sock:ro&quot;</span>
 
-    whoami:
-      # omitido
+<span class="w">    </span><span class="nt">whoami</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># omitido</span>
 </code></pre></div>
 <p>A continuación, se detalla el funcionamiento de esta configuración:</p>
 <h4 id="211-apartado-command">2.1.1. Apartado <code>command</code><a class="headerlink" href="#211-apartado-command" title="Permanent link">&para;</a></h4>
@@ -1066,19 +1066,19 @@
 </ul>
 <h4 id="214-el-servicio-whoami">2.1.4. El servicio whoami<a class="headerlink" href="#214-el-servicio-whoami" title="Permanent link">&para;</a></h4>
 <p>Observe ahora la descripción del servicio <code>whoami</code> en el fichero  <code>traefik.v1.yml</code> </p>
-<div class="highlight"><pre><span></span><code>services:
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 
-  traefik:
-    # omitido
+<span class="w">  </span><span class="nt">traefik</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># omitido</span>
 
-  whoami:
-    image: &quot;traefik/whoami&quot;
-    container_name: &quot;simple-service&quot;
-    labels:
-      - &quot;traefik.enable=true&quot;
-      - &quot;traefik.http.routers.whoami.rule=Host(`whoami.angoies.tech`)&quot;
-      - &quot;traefik.http.routers.whoami.entrypoints=websecure&quot;
-      - &quot;traefik.http.routers.whoami.tls.certresolver=myresolver&quot;
+<span class="w">  </span><span class="nt">whoami</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;traefik/whoami&quot;</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;simple-service&quot;</span>
+<span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.enable=true&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.http.routers.whoami.rule=Host(`whoami.angoies.tech`)&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.http.routers.whoami.entrypoints=websecure&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.http.routers.whoami.tls.certresolver=myresolver&quot;</span>
 </code></pre></div>
 <p>Las <code>labels</code> son la clave para indicarle a Traefik como manejar este servicio. Las primeras son genéricas:
 - <code>traefik.enable=true</code>: Habilita la integración de este servicio con Traefik.
@@ -1090,50 +1090,55 @@
 </ul>
 <h3 id="22-flujo-de-funcionamiento">2.2. Flujo de funcionamiento<a class="headerlink" href="#22-flujo-de-funcionamiento" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>Inicio de Traefik</strong>:</li>
-<li>Traefik se inicia con la configuración especificada.</li>
 <li>
-<p>Detecta servicios habilitados en Docker a través del socket y sus etiquetas.</p>
+<p><strong>Inicio de Traefik</strong>:</p>
+<ul>
+<li>Traefik se inicia con la configuración especificada.</li>
+<li>Detecta servicios habilitados en Docker a través del socket y sus etiquetas.</li>
+</ul>
 </li>
 <li>
 <p><strong>Configuración de HTTPS</strong>:</p>
-</li>
+<ul>
 <li>Cuando un cliente accede a <code>whoami.angoies.tech</code>, Traefik usa el resolvedor <code>myresolver</code> para gestionar el certificado TLS.</li>
 <li>La primera vez que se accede Let's Encrypt valida el dominio mediante un desafío TLS, y si el desafio es superado emite un certificado automáticamente. El certificado se almacena en el fichero <code>acme.json</code> del volumen. En siguintes peticiones basta comprobar que el certificado almaceando sigue siendo válido. </li>
-<li></li>
-<li><strong>Redirección</strong>:</li>
+</ul>
+</li>
+<li>
+<p><strong>Redirección</strong>:</p>
+<ul>
 <li>Traefik recibe las solicitudes HTTPS en el puerto 443. </li>
 <li>Según la regla definida (<code>Host</code>) las redirige al contenedor <code>whoami</code>.</li>
+</ul>
+</li>
 </ol>
 <h3 id="23-consideraciones-adicionales">2.3. Consideraciones adicionales<a class="headerlink" href="#23-consideraciones-adicionales" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Seguridad</strong>:</li>
 <li>La opción <code>--api.insecure=true</code> expone el panel de control sin autenticación. Es recomendable deshabilitarlo (<code>--api=false</code>) o protegerlo en producción.</li>
 <li><strong>Los volúmenes y configuraciones relacionadas con Let's Encrypt deben ser persistentes</strong> y estar protegidos adecuadamente.</li>
 </ul>
 <h3 id="24-prueba-del-primer-escenario">2.4. Prueba del primer escenario<a class="headerlink" href="#24-prueba-del-primer-escenario" title="Permanent link">&para;</a></h3>
 <p>Basta hacer una petición con el comando <code>curl</code> para probar la conexión HTTPS al servicio whoami:</p>
-<div class="highlight"><pre><span></span><code>curl https://whoami.angoies.tech
-...
+<div class="highlight"><pre><span></span><code><span class="go">curl https://whoami.angoies.tech</span>
 </code></pre></div>
 <h2 id="3-anadir-un-servidor-web">3. Añadir un servidor web<a class="headerlink" href="#3-anadir-un-servidor-web" title="Permanent link">&para;</a></h2>
 <p>El segundo salto consite en añadir un segundo servicio a traefik que también use certificados. La configuración puede ampliarse fácilmente añadiendo servicios con etiquetas similares. </p>
 <p>En este caso (v2) se añade el servidor web <code>nginx</code>. </p>
-<div class="highlight"><pre><span></span><code>services:
-  traefik:
-    # omitido
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">traefik</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># omitido</span>
 
-  whoami:
-    # omitido
+<span class="w">  </span><span class="nt">whoami</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># omitido</span>
 
-  nginx:
-    image: nginx:latest
-    container_name: nginx_server
-    labels:
-      - &quot;traefik.enable=true&quot;
-      - &quot;traefik.http.routers.nginx.rule=Host(`web.angoies.tech`)&quot;
-      - &quot;traefik.http.routers.nginx.entrypoints=websecure&quot;
-      - &quot;traefik.http.routers.nginx.tls.certresolver=myresolver&quot;
+<span class="w">  </span><span class="nt">nginx</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:latest</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx_server</span>
+<span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.enable=true&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.http.routers.nginx.rule=Host(`web.angoies.tech`)&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.http.routers.nginx.entrypoints=websecure&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.http.routers.nginx.tls.certresolver=myresolver&quot;</span>
 </code></pre></div>
 <p>Observe que las labels son similares a las del servicio whoami </p>
 <ul>
@@ -1143,8 +1148,7 @@
 </ul>
 <h3 id="31-prueba">3.1. Prueba<a class="headerlink" href="#31-prueba" title="Permanent link">&para;</a></h3>
 <p>Basta con hacer una petición con el comando <code>curl</code> y probar la conexión HTTPS:</p>
-<div class="highlight"><pre><span></span><code>$ curl https://web.angoies.tech
-...
+<div class="highlight"><pre><span></span><code>curl https://web.angoies.tech
 </code></pre></div>
 <h2 id="4-redireccion-http-a-https">4. Redirección http a https<a class="headerlink" href="#4-redireccion-http-a-https" title="Permanent link">&para;</a></h2>
 <p>Hasta este momento los servicios sólo admiten trafico HTTPS, y las peticiones HTTP no funcionan (también sería posible configurar el acceso HTTP por separado del acceso a HTTPS). Pero en este paso vamos a modificar la configuración para que se establezca una redirección automática de tráfico HTTP (puerto 80) a HTTPS (puerto 443). Esto mejora la seguridad de los servicios al garantizar que todas las conexiones se realicen mediante un canal cifrado.</p>
@@ -1194,11 +1198,10 @@
 </blockquote>
 <h3 id="41-prueba">4.1. Prueba<a class="headerlink" href="#41-prueba" title="Permanent link">&para;</a></h3>
 <p>Basta con hacer una petición con el comando <code>curl</code> y probar la conexión HTTPS. <strong>Para poder seguir la redireccion con <code>curl</code></strong> debe usar la opción <code>-L</code>:</p>
-<div class="highlight"><pre><span></span><code>$ curl http://whoami.angoies.tech
+<div class="highlight"><pre><span></span><code>curl http://whoami.angoies.tech
 ...
-$ curl -L http://whoami.angoies.tech
+curl -L http://whoami.angoies.tech
 ...
-$
 </code></pre></div>
 <h2 id="5-ficheros">5. Ficheros<a class="headerlink" href="#5-ficheros" title="Permanent link">&para;</a></h2>
 <ul>
