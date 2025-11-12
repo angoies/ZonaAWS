@@ -1,0 +1,809 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../tema3/AWS_EC2_docker/">
+      
+      
+        <link rel="next" href="../../tema5/AWS_traefik_certificados/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+    
+    
+      
+        <title>Tu imagen en AWS - Zona AWS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deploy-aplicacion-dockerizada" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Zona AWS" class="md-header__button md-logo" aria-label="Zona AWS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Zona AWS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Tu imagen en AWS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Zona AWS" class="md-nav__button md-logo" aria-label="Zona AWS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Zona AWS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/AWS_intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Intro AWS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/AWS_EC2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    EC2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema3/AWS_EC2_docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker en AWS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Tu imagen en AWS
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Tu imagen en AWS
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Introducción
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-probar-la-aplicacion-sin-dockerizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Probar la aplicación sin dockerizar
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Probar la aplicación sin dockerizar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-prueba-con-servidor-de-aplicaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. Prueba con servidor de aplicaciones
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-generar-una-imagen-docker-con-la-aplicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Generar una imagen Docker con la aplicación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-subir-la-imagen-a-dockerhub" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Subir la imagen a Dockerhub
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-desplegar-en-ec2" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Desplegar en EC2
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema5/AWS_traefik_certificados/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Traefik, AWS y SSL
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Ampliación
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Ampliación
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema6/AWS_CLI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS CLI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema7/AWS_ECR/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS ECR
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Introducción
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-probar-la-aplicacion-sin-dockerizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Probar la aplicación sin dockerizar
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Probar la aplicación sin dockerizar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-prueba-con-servidor-de-aplicaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. Prueba con servidor de aplicaciones
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-generar-una-imagen-docker-con-la-aplicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Generar una imagen Docker con la aplicación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-subir-la-imagen-a-dockerhub" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Subir la imagen a Dockerhub
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-desplegar-en-ec2" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Desplegar en EC2
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="deploy-aplicacion-dockerizada">Deploy aplicación dockerizada<a class="headerlink" href="#deploy-aplicacion-dockerizada" title="Permanent link">&para;</a></h1>
+<h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
+<p>Práctica similar a las anteriores, el cambio es que la imagen utilizada es una imagen creada por el usuario.</p>
+<h2 id="2-probar-la-aplicacion-sin-dockerizar">2. Probar la aplicación sin <em>dockerizar</em><a class="headerlink" href="#2-probar-la-aplicacion-sin-dockerizar" title="Permanent link">&para;</a></h2>
+<p>Se le proporciona una aplicación Python que usa el <em>framework</em> Flask. No es propósito de la práctica avanzar en el uso de ese framework.</p>
+<p>Puede descargae el fichero <a href="../src/galeria.zip">galeria.zip</a></p>
+<p>En el directorio de la aplicación tiene disponible:</p>
+<div class="highlight"><pre><span></span><code>~/galeria$<span class="w"> </span>tree<span class="w"> </span>.
+.
+├──<span class="w"> </span>Dockerfile
+├──<span class="w"> </span>README.md
+├──<span class="w"> </span>requirements.txt
+└──<span class="w"> </span>src
+<span class="w">    </span>├──<span class="w"> </span>app.py
+<span class="w">    </span>├──<span class="w"> </span>static
+<span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>estilos.css
+<span class="w">    </span>└──<span class="w"> </span>templates
+<span class="w">        </span>└──<span class="w"> </span>index.html
+
+<span class="m">3</span><span class="w"> </span>directories,<span class="w"> </span><span class="m">6</span><span class="w"> </span>files
+~/galeria$<span class="w"> </span>
+</code></pre></div>
+<p>Para probar la aplicación en local (y sin <em>dockerizar</em>) se crea un entorno virtual con venv, y se instalan las dependencias (<code>flask</code> y <code>gunicorn</code>) usando el fichero <code>requirements.txt</code>. </p>
+<div class="highlight"><pre><span></span><code>~/galeria$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+~/galeria$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+...
+<span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+....
+<span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>
+</code></pre></div>
+<p>Una vez creado el entorno e instaladas las dependencias se lanza la aplicación con el comando <code>python src/app.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>python<span class="w"> </span>src/app.py<span class="w"> </span>
+*<span class="w"> </span>Serving<span class="w"> </span>Flask<span class="w"> </span>app<span class="w"> </span><span class="s1">&#39;app&#39;</span>
+*<span class="w"> </span>Debug<span class="w"> </span>mode:<span class="w"> </span>on
+WARNING:<span class="w"> </span>This<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>development<span class="w"> </span>server.<span class="w"> </span>Do<span class="w"> </span>not<span class="w"> </span>use<span class="w"> </span>it<span class="w"> </span><span class="k">in</span><span class="w"> </span>a<span class="w"> </span>production<span class="w"> </span>deployment.<span class="w"> </span>Use<span class="w"> </span>a<span class="w"> </span>production<span class="w"> </span>WSGI<span class="w"> </span>server<span class="w"> </span>instead.
+*<span class="w"> </span>Running<span class="w"> </span>on<span class="w"> </span>http://127.0.0.1:5000
+Press<span class="w"> </span>CTRL+C<span class="w"> </span>to<span class="w"> </span>quit
+*<span class="w"> </span>Restarting<span class="w"> </span>with<span class="w"> </span>stat
+*<span class="w"> </span>Debugger<span class="w"> </span>is<span class="w"> </span>active!
+*<span class="w"> </span>Debugger<span class="w"> </span>PIN:<span class="w"> </span><span class="m">944</span>-294-141
+<span class="m">127</span>.0.0.1<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span><span class="o">[</span><span class="m">13</span>/Feb/2023<span class="w"> </span><span class="m">10</span>:30:32<span class="o">]</span><span class="w"> </span><span class="s2">&quot;GET / HTTP/1.1&quot;</span><span class="w"> </span><span class="m">200</span><span class="w"> </span>-
+<span class="m">127</span>.0.0.1<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span><span class="o">[</span><span class="m">13</span>/Feb/2023<span class="w"> </span><span class="m">10</span>:30:32<span class="o">]</span><span class="w"> </span><span class="s2">&quot;GET /static/estilos.css HTTP/1.1&quot;</span><span class="w"> </span><span class="m">304</span><span class="w"> </span>-
+...
+</code></pre></div>
+<p>Acceda a la URL http://127.0.0.1:5000 para comprobar que la aplicación funciona. Detenga la aplicación pulsando<code>Ctrl+C</code>.</p>
+<h3 id="21-prueba-con-servidor-de-aplicaciones">2.1. Prueba con servidor de aplicaciones<a class="headerlink" href="#21-prueba-con-servidor-de-aplicaciones" title="Permanent link">&para;</a></h3>
+<p>En un entorno de producción se usaría un servidor de aplicaciones. En este caso se usa <code>gunicorn</code> y la forma de invocarlo sería:</p>
+<p><div class="highlight"><pre><span></span><code><span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>gunicorn<span class="w"> </span>--chdir<span class="w"> </span>src<span class="w"> </span>app:app<span class="w"> </span>--bind<span class="w"> </span><span class="m">0</span>.0.0.0:5000<span class="w"> </span>--reload<span class="w"> </span>--access-logfile<span class="w"> </span>-
+<span class="o">[</span><span class="m">2023</span>-02-13<span class="w"> </span><span class="m">10</span>:32:50<span class="w"> </span>+0100<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">3863</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Starting<span class="w"> </span>gunicorn<span class="w"> </span><span class="m">20</span>.1.0
+<span class="o">[</span><span class="m">2023</span>-02-13<span class="w"> </span><span class="m">10</span>:32:50<span class="w"> </span>+0100<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">3863</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Listening<span class="w"> </span>at:<span class="w"> </span>http://0.0.0.0:5000<span class="w"> </span><span class="o">(</span><span class="m">3863</span><span class="o">)</span>
+<span class="o">[</span><span class="m">2023</span>-02-13<span class="w"> </span><span class="m">10</span>:32:50<span class="w"> </span>+0100<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">3863</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Using<span class="w"> </span>worker:<span class="w"> </span>sync
+<span class="o">[</span><span class="m">2023</span>-02-13<span class="w"> </span><span class="m">10</span>:32:50<span class="w"> </span>+0100<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">3864</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Booting<span class="w"> </span>worker<span class="w"> </span>with<span class="w"> </span>pid:<span class="w"> </span><span class="m">3864</span>
+...
+</code></pre></div>
+Acceda nuevamente a la URL para comprobar que la aplicación funciona. Las opciones de gunicorn <code>--reload --access-logfile -</code> se usan en desarrollo.</p>
+<h2 id="3-generar-una-imagen-docker-con-la-aplicacion">3. Generar una imagen Docker con la aplicación<a class="headerlink" href="#3-generar-una-imagen-docker-con-la-aplicacion" title="Permanent link">&para;</a></h2>
+<p>Si todos los pasos anteriores son correctos está preparado para crear la imagen docker. El fichero <code>Dockerfile</code> a usar será similar a este:</p>
+<div class="highlight"><pre><span></span><code><span class="c"># start by pulling the python image</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3-slim</span>
+<span class="c"># switch working directory</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<span class="c"># copy the requirements file into the image</span>
+<span class="k">COPY</span><span class="w"> </span>./requirements.txt<span class="w"> </span>./
+<span class="c"># install the dependencies and packages in the requirements file</span>
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<span class="c"># copy every content from the local file to the image</span>
+<span class="k">COPY</span><span class="w"> </span>src<span class="w"> </span>.
+<span class="c"># configure the container to run in an executed manner</span>
+<span class="k">CMD</span><span class="w"> </span>gunicorn<span class="w"> </span>--bind<span class="w"> </span><span class="m">0</span>.0.0.0:5000<span class="w"> </span>app:app
+</code></pre></div>
+<p>Se construye la imagen con <code>docker build</code></p>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>galeriaflask:latest<span class="w"> </span>.
+<span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Building<span class="w"> </span><span class="m">0</span>.5s<span class="w"> </span><span class="o">(</span><span class="m">10</span>/10<span class="o">)</span><span class="w"> </span>
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">1</span>/5<span class="o">]</span><span class="w"> </span>FROM<span class="w"> </span>docker.io/<span class="w"> </span>
+
+<span class="w"> </span>...
+
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>writing<span class="w"> </span>image<span class="w"> </span>sha256:eddfcc73aa07559ad45ac3ee6bfbe8e1d85cf3775a445aa64691cc300abdb7bb<span class="w">             </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>naming<span class="w"> </span>to<span class="w"> </span>docker.io/library/galeriaflask:latest<span class="w">                                                   </span><span class="m">0</span>.0s
+<span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>docker<span class="w"> </span>image<span class="w"> </span>ls
+REPOSITORY<span class="w">     </span>TAG<span class="w">       </span>IMAGE<span class="w"> </span>ID<span class="w">       </span>CREATED<span class="w">         </span>SIZE
+galeriaflask<span class="w">   </span>latest<span class="w">    </span>eddfcc73aa07<span class="w">   </span><span class="m">3</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">   </span>145MB
+hello-world<span class="w">    </span>latest<span class="w">    </span>feb5d9fea6a5<span class="w">   </span><span class="m">16</span><span class="w"> </span>months<span class="w"> </span>ago<span class="w">   </span><span class="m">13</span>.3kB
+<span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>
+</code></pre></div>
+<p>Y se prueba la imagen en su equipo:</p>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>-p<span class="w"> </span><span class="m">5000</span>:5000<span class="w"> </span>galeriaflask
+<span class="o">[</span><span class="m">2023</span>-02-13<span class="w"> </span><span class="m">10</span>:06:47<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">8</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Starting<span class="w"> </span>gunicorn<span class="w"> </span><span class="m">20</span>.1.0
+<span class="o">[</span><span class="m">2023</span>-02-13<span class="w"> </span><span class="m">10</span>:06:47<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">8</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Listening<span class="w"> </span>at:<span class="w"> </span>http://0.0.0.0:5000<span class="w"> </span><span class="o">(</span><span class="m">8</span><span class="o">)</span>
+<span class="o">[</span><span class="m">2023</span>-02-13<span class="w"> </span><span class="m">10</span>:06:47<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">8</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Using<span class="w"> </span>worker:<span class="w"> </span>sync
+<span class="o">[</span><span class="m">2023</span>-02-13<span class="w"> </span><span class="m">10</span>:06:47<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">9</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Booting<span class="w"> </span>worker<span class="w"> </span>with<span class="w"> </span>pid:<span class="w"> </span><span class="m">9</span>
+...
+</code></pre></div>
+<h2 id="4-subir-la-imagen-a-dockerhub">4. Subir la imagen a Dockerhub<a class="headerlink" href="#4-subir-la-imagen-a-dockerhub" title="Permanent link">&para;</a></h2>
+<p>En prácticas previas se mostró como subir una imagen a Dockerhub. En primer lugar necesita renombrarla con su usuario en Dockerhub, y hacer  <em>push</em> de la imagen (puede ser que necesite hacer <code>docker login</code> antes). </p>
+<p>Primero se renombra la imagen galeria:</p>
+<p><div class="highlight"><pre><span></span><code><span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>docker<span class="w"> </span>tag<span class="w"> </span>galeriaflask:latest<span class="w"> </span>angoies/galeriaflask:latest<span class="w"> </span>
+<span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>docker<span class="w"> </span>image<span class="w"> </span>ls
+REPOSITORY<span class="w">             </span>TAG<span class="w">       </span>IMAGE<span class="w"> </span>ID<span class="w"> </span>CREATED<span class="w">          </span>SIZE
+angoies/galeriaflask<span class="w">   </span>latest<span class="w">    </span>eddfc7<span class="w">   </span><span class="m">10</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">   </span>145MB
+galeriaflask<span class="w">           </span>latest<span class="w">    </span>eddfc<span class="w">    </span><span class="m">10</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">   </span>145MB
+<span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>
+</code></pre></div>
+Haga login en DockerHub si es necesario y suba la imagen a DockerHub</p>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>docker<span class="w"> </span>push<span class="w"> </span>angoies/galeriaflask:latest<span class="w"> </span>
+The<span class="w"> </span>push<span class="w"> </span>refers<span class="w"> </span>to<span class="w"> </span>repository<span class="w"> </span><span class="o">[</span>docker.io/angoies/galeriaflask<span class="o">]</span>
+8c1abd2be38e:<span class="w"> </span>Pushed<span class="w"> </span>
+9fdb2af238fa:<span class="w"> </span>Pushed<span class="w"> </span>
+36e5ac463d7d:<span class="w"> </span>Mounted<span class="w"> </span>from<span class="w"> </span>library/python<span class="w"> </span>
+4695cdfb426a:<span class="w"> </span>Mounted<span class="w"> </span>from<span class="w"> </span>library/python<span class="w"> </span>
+latest:<span class="w"> </span>digest:<span class="w"> </span>sha256:5cab61ff56ef823575025ffc0efcb8<span class="w"> </span>size:<span class="w"> </span><span class="m">2203</span>
+<span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>
+</code></pre></div>
+<p>Si quiere comprobar que la imagen se ha subido correctamente puede comprobarlo en la web de dockerhub p puede borrar la imagen almacenada en local con <code>docker rmi</code> y volver a lanzar la imagen con  <code>docker run --pull always ...</code></p>
+<h2 id="5-desplegar-en-ec2">5. Desplegar en EC2<a class="headerlink" href="#5-desplegar-en-ec2" title="Permanent link">&para;</a></h2>
+<p>Si tiene creada la instancia EC2 y Docker instalado en ella basta lanzar el contenedor desde la conexión SSH.</p>
+<ol>
+<li>
+<p>Conectar a EC2:</p>
+<p><div class="highlight"><pre><span></span><code>~/aws$<span class="w"> </span>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;vockey.pem&quot;</span><span class="w"> </span>admin@ec2-54-144-151-21.compute-1.amazonaws.com
+...
+Debian<span class="w"> </span>GNU/Linux<span class="w"> </span>...<span class="w"> </span>permitted<span class="w"> </span>by<span class="w"> </span>applicable<span class="w"> </span>law.
+Last<span class="w"> </span>login:<span class="w"> </span>Sun<span class="w"> </span>Feb<span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">20</span>:02:42<span class="w"> </span><span class="m">2023</span><span class="w"> </span>from<span class="w"> </span><span class="m">81</span>.40.160.27
+
+admin@ip-172-31-55-39:~$<span class="w"> </span>docker<span class="w"> </span>--version
+
+Docker<span class="w"> </span>version<span class="w"> </span><span class="m">23</span>.0.1,<span class="w"> </span>build<span class="w"> </span>a5ee5b1
+
+admin@ip-172-31-55-39:~$<span class="w"> </span>
+</code></pre></div>
+2. Descargar la imagen:
+<div class="highlight"><pre><span></span><code>admin@ip-172-31-55-39:~$<span class="w"> </span>docker<span class="w"> </span>pull<span class="w"> </span>angoies/galeriaflask
+Using<span class="w"> </span>default<span class="w"> </span>tag:<span class="w"> </span>latest
+...
+docker.io/angoies/galeriaflask:latest
+admin@ip-172-31-55-39:~$<span class="w"> </span>
+</code></pre></div>
+3. Lanzar la imagen. Observe la redirección de puertos <code>-p 80:5000</code> ya que la aplicación espera conexiones en el puerto 5000 y la instancia EC2 está configurada para aceptar peticiones en el puerto 80:
+<div class="highlight"><pre><span></span><code>admin@ip-172-31-55-39:~$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>-p<span class="w"> </span><span class="m">80</span>:5000<span class="w"> </span>angoies/galeriaflask
+<span class="o">[</span><span class="m">2023</span>-02-13<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">7</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Starting<span class="w"> </span>gunicorn<span class="w"> </span><span class="m">20</span>.1.0
+<span class="o">[</span><span class="m">2023</span>-02-13<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">7</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Listening<span class="w"> </span>at:<span class="w"> </span>http://0.0.0.0:5000<span class="w"> </span><span class="o">(</span><span class="m">7</span><span class="o">)</span>
+<span class="o">[</span><span class="m">2023</span>-02-13<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">7</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Using<span class="w"> </span>worker:<span class="w"> </span>sync
+<span class="o">[</span><span class="m">2023</span>-02-13<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">8</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Booting<span class="w"> </span>worker<span class="w"> </span>with<span class="w"> </span>pid:<span class="w"> </span><span class="m">8</span>
+</code></pre></div>
+4. Probar que la aplicación es accesible.Compruebe la IP
+<img alt="" src="../../figuras/aws_20.png" /></p>
+<p>Y acceda a la misma:</p>
+<p><img alt="" src="../../figuras/aws_21.png" /></p>
+</li>
+<li>
+<p>No olvide terminar la instancia EC2 y salir ordenadamente de la consola AWS y del Learner Lab.</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

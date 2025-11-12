@@ -1,0 +1,1347 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../tema4/AWS_imagen_propia/">
+      
+      
+        <link rel="next" href="../../tema6/AWS_CLI/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+    
+    
+      
+        <title>Traefik, AWS y SSL - Zona AWS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#traefik-y-https" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Zona AWS" class="md-header__button md-logo" aria-label="Zona AWS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Zona AWS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Traefik, AWS y SSL
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Zona AWS" class="md-nav__button md-logo" aria-label="Zona AWS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Zona AWS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/AWS_intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Intro AWS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/AWS_EC2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    EC2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema3/AWS_EC2_docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker en AWS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema4/AWS_imagen_propia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tu imagen en AWS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Traefik, AWS y SSL
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Traefik, AWS y SSL
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-escenario-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Escenario inicial
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Escenario inicial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-ec2-en-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1. EC2 en AWS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-dominio-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2. Dominio DNS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-traefik-lets-encript-y-el-servicio-whoami" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Traefik, Let's Encript y el servicio whoami
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Traefik, Let&#39;s Encript y el servicio whoami">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-lets-encrypt-en-traefik" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. Let's Encrypt en Traefik
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1. Let&#39;s Encrypt en Traefik">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211-apartado-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1.1. Apartado command
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212-puertos-mapeados" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1.2. Puertos mapeados
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#213-volumenes" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1.3. Volúmenes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#214-el-servicio-whoami" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1.4. El servicio whoami
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-flujo-de-funcionamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2. Flujo de funcionamiento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-consideraciones-adicionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3. Consideraciones adicionales
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-prueba-del-primer-escenario" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4. Prueba del primer escenario
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-anadir-un-servidor-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Añadir un servidor web
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Añadir un servidor web">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1. Prueba
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-redireccion-http-a-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Redirección http a https
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Redirección http a https">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1. Prueba
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-ficheros" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Ficheros
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-anexos-de-ampliacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Anexos de ampliación
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Anexos de ampliación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-desafio-tls-alpn-y-el-fichero-acmejson" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1. desafío TLS-ALPN y el fichero acme.json
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1. desafío TLS-ALPN y el fichero acme.json">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#611-el-papel-del-archivo-acmejson" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1.1. El papel del archivo acme.json
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#612-importancia-y-buenas-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1.2. Importancia y buenas prácticas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#613-conexion-entre-el-desafio-y-acmejson" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1.3. Conexión entre el desafío y acme.json
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Ampliación
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Ampliación
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema6/AWS_CLI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS CLI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema7/AWS_ECR/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS ECR
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-escenario-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Escenario inicial
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Escenario inicial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-ec2-en-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1. EC2 en AWS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-dominio-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2. Dominio DNS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-traefik-lets-encript-y-el-servicio-whoami" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Traefik, Let's Encript y el servicio whoami
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Traefik, Let&#39;s Encript y el servicio whoami">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-lets-encrypt-en-traefik" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. Let's Encrypt en Traefik
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1. Let&#39;s Encrypt en Traefik">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211-apartado-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1.1. Apartado command
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212-puertos-mapeados" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1.2. Puertos mapeados
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#213-volumenes" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1.3. Volúmenes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#214-el-servicio-whoami" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1.4. El servicio whoami
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-flujo-de-funcionamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2. Flujo de funcionamiento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-consideraciones-adicionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3. Consideraciones adicionales
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-prueba-del-primer-escenario" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4. Prueba del primer escenario
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-anadir-un-servidor-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Añadir un servidor web
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Añadir un servidor web">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1. Prueba
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-redireccion-http-a-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Redirección http a https
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Redirección http a https">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1. Prueba
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-ficheros" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Ficheros
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-anexos-de-ampliacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Anexos de ampliación
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Anexos de ampliación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-desafio-tls-alpn-y-el-fichero-acmejson" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1. desafío TLS-ALPN y el fichero acme.json
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1. desafío TLS-ALPN y el fichero acme.json">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#611-el-papel-del-archivo-acmejson" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1.1. El papel del archivo acme.json
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#612-importancia-y-buenas-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1.2. Importancia y buenas prácticas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#613-conexion-entre-el-desafio-y-acmejson" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1.3. Conexión entre el desafío y acme.json
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="traefik-y-https">Traefik y https<a class="headerlink" href="#traefik-y-https" title="Permanent link">&para;</a></h1>
+<h2 id="1-escenario-inicial">1. Escenario inicial<a class="headerlink" href="#1-escenario-inicial" title="Permanent link">&para;</a></h2>
+<h3 id="11-ec2-en-aws">1.1. EC2 en AWS<a class="headerlink" href="#11-ec2-en-aws" title="Permanent link">&para;</a></h3>
+<p>Para el desarrollo de la práctica se partirá de:</p>
+<ul>
+<li>una instancia EC2 en AWS con docker ya instalado (debe poder acceder a la instancia usando ssh).</li>
+<li>una IP elástica asociada a la instancia (para poder asociarla a un dominio DNS). </li>
+</ul>
+<h3 id="12-dominio-dns">1.2. Dominio DNS<a class="headerlink" href="#12-dominio-dns" title="Permanent link">&para;</a></h3>
+<p>Necesita un dominio a gestionar para asociar nombres de host a la IP elástica usada en la instancia EC2 de AWS. Tiene entre otras las siguientes opciones gratuitas:</p>
+<ul>
+<li><a href="https://www.dynu.com/">Dynu</a>  y su servicio DDNS</li>
+<li><a href="https://www.duckdns.org">Duckdns</a></li>
+<li>otras en este <a href="https://www.gnutomorrow.com/best-free-dynamic-dns-services/">listado</a></li>
+<li>el dominio <code>.tech</code> que es gratuito usando el <em>Developer Pack Student</em> de GitHub <a href="https://get.tech/github-student-developer-pack">https://get.tech/github-student-developer-pack</a>. En este caso tenga en cuenta que:<ol>
+<li><strong>Importante</strong>: debe realizar el alta desde esta dirección: <a href="https://get.tech/github-student-developer-pack">https://get.tech/github-student-developer-pack</a></li>
+<li>Buscar y seleccionar un dominio libre</li>
+<li>Al ordenar el pago hay un botón para identificarse con su cuenta de GitHub (la que esté asociada a los beneficios del <em>github student developer pack</em>).</li>
+<li>Al usar esa opción el coste del dominio debe ser gratis durante un año.</li>
+<li>Para gestionar el dominio acceda a <a href="http://controlpanel.tech/customer">http://controlpanel.tech/customer.</a>. </li>
+</ol>
+</li>
+</ul>
+<p>Para el desarrollo de este enunciado y sus ejemplos se ha creado el dominio <code>angoies.tech</code> y se le ha asociado la IP elástica de la instancia EC2 de AWS. Además se han creado dos registros de tipo CNAME: <code>whoami.angoies.tech</code> y <code>web.angoies.tech</code>  asociados a  <code>angoies.tech</code>. Deberá hacer algo similar con su dominio. </p>
+<blockquote>
+<p>Otra opción es crear un dominio en Dynu (o Duckdns). En el caso de Dynu se parte de dominios de segundo nivel, por ejemplo <code>freeddns.org</code>. En ese caso el dominio creado podría ser <code>clases.freeddns.org</code>, y se le asocia la IP elástica de la instancia EC2 de AWS a ese dominio. Además se pueden crear registros de tipo CNAME: <code>whoami.clases.freeddns.org</code> y <code>web.clases.freeddns.org</code>  asociados a  <code>clases.freeddns.org</code>. De todas formas tanto Dynu como duckdns admiten <strong>wildcards</strong> en el dominio por lo que no haría falta crear los CNAMEs si apuntan todos a la misma IP.</p>
+</blockquote>
+<h2 id="2-traefik-lets-encript-y-el-servicio-whoami">2. Traefik, Let's Encript y el servicio  whoami<a class="headerlink" href="#2-traefik-lets-encript-y-el-servicio-whoami" title="Permanent link">&para;</a></h2>
+<p>En este apartado verá un primer ejemplo donde se expone el servicio de prueba <code>whoami</code> <strong>mediante https</strong>. Para ello necesitaría un certificado válido en el servidor <code>whoami</code>. Y como Traefik hace funciones de proxy inverso <strong>el certificado se instalará en Traefik</strong>. </p>
+<p>Let’s Encrypt es una Autoridad de Certificación gratuita, automatizada, y abierta. Si tiene acceso ssh a su servidor puede obtener un certificado utilizando el cliente que ellos propocionan. Como indican en su web:</p>
+<blockquote>
+<p>Recomendamos que la mayoría de las personas con acceso shell usen el cliente ACME llamado Certbot. Éste puede automatizar la emisión e instalación de certificados con cero tiempo de inactividad. También tiene modos de expertos para personas que no quieren autoconfiguración. Es fácil de usar, funciona en muchos sistemas operativos, y tiene documentación genial. Visita la página web de Certbot para conseguir instrucciones para tu sistema operativo y servidor de web.  </p>
+</blockquote>
+<p>En el caso de Traefik el contenedor de traefik hace las funciones de cliente ACME y no se necesita usar el cliente Certbot. Y todoa la configuración se puede realizar en el fichero <code>docker-compose.yml</code>.</p>
+<h3 id="21-lets-encrypt-en-traefik">2.1. Let's Encrypt en Traefik<a class="headerlink" href="#21-lets-encrypt-en-traefik" title="Permanent link">&para;</a></h3>
+<p>Para llegar a la solución final se darán tres pasos usando los ficheros <code>traefik.vxX.yml</code> (v1, v2 y v3).</p>
+<p>En el primer paso se configura traefik, el servicio whoami y SSL. En esta versión whoami sólo es accesible mediante https usando los  certificados proporcionados por <strong>Let's Encrypt</strong>. </p>
+<p>Primero observe la configuración del servicio <code>traefik</code> donde se han añadido opciones respecto a ejemplos previos en <code>ports</code>, <code>command</code> y <code>volumes</code></p>
+<div class="highlight"><pre><span></span><code>services:
+  traefik:
+    image: &quot;traefik:v3.3&quot;
+    command:
+      - &quot;--log.level=DEBUG&quot;  # se incrementa el nivel de log
+      - &quot;--api.insecure=true&quot;
+      - &quot;--providers.docker=true&quot;
+      - &quot;--providers.docker.exposedbydefault=false&quot;
+
+      # Para SSL
+      - &quot;--entryPoints.websecure.address=:443&quot;
+      - &quot;--certificatesresolvers.myresolver.acme.tlschallenge=true&quot;
+      # - &quot;--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory&quot;
+      - &quot;--certificatesresolvers.myresolver.acme.email=profesor@midominio.com&quot;
+      - &quot;--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json&quot;
+
+    ports:
+      - &quot;443:443&quot;   # HTTPS 
+      - &quot;8080:8080&quot; # The Web UI 
+    volumes:
+      # Volumen para certificado
+      - &quot;./letsencrypt:/letsencrypt&quot;  
+      - &quot;/var/run/docker.sock:/var/run/docker.sock:ro&quot;
+
+    whoami:
+      # omitido
+</code></pre></div>
+<p>A continuación, se detalla el funcionamiento de esta configuración:</p>
+<h4 id="211-apartado-command">2.1.1. Apartado <code>command</code><a class="headerlink" href="#211-apartado-command" title="Permanent link">&para;</a></h4>
+<p>En este apartado es en el que se observan más cambios.</p>
+<p>En primer lugar opciones generales que no tienen que ver con el certificado:</p>
+<ul>
+<li><code>--log.level=DEBUG</code>: Activa el registro detallado para facilitar la depuración.</li>
+<li><code>--api.insecure=true</code>: Habilita el panel de control en el puerto <code>8080</code> sin autenticación, útil para pruebas (no recomendado en producción).</li>
+<li><code>--providers.docker=true</code>: Configura Traefik para detectar servicios mediante Docker.</li>
+<li><code>--providers.docker.exposedbydefault=false</code>: Obliga a etiquetar explícitamente los servicios que serán manejados por Traefik, mejorando la seguridad.</li>
+</ul>
+<p>Y las opciones relacionadas con el certificado:</p>
+<ul>
+<li>
+<p><code>--entryPoints.websecure.address=:443</code>: Define el punto de entrada seguro (HTTPS) en el puerto 443. Este será utilizado por los servicios que necesitan certificados TLS.</p>
+</li>
+<li>
+<p><code>--certificatesresolvers.myresolver.acme.tlschallenge=true</code>:  Activa el desafío TLS-ALPN para validar el dominio con Let's Encrypt. Este método requiere que el puerto 443 esté accesible desde Internet.</p>
+</li>
+<li>
+<p><code>--certificatesresolvers.myresolver.acme.email=profsor@midominio.com</code>: Correo electrónico registrado en Let's Encrypt para recibir notificaciones.</p>
+</li>
+<li>
+<p><code>--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json</code>: Define el archivo donde se almacenarán los certificados y datos relacionados de ACME. <strong>Es esencial que este archivo sea persistente</strong>.</p>
+</li>
+<li>
+<p>La línea comentada <code>--certificatesresolvers.myresolver.acme.caserver</code> apunta al entorno de pruebas de Let's Encrypt. Esto es útil para evitar límites de emisión durante las pruebas.</p>
+</li>
+</ul>
+<p>Tenga en cuenta que el nombre <strong><code>myresolver</code></strong>  que se utiliza en estas opciones sera necesario luego en los servicios. </p>
+<h4 id="212-puertos-mapeados">2.1.2. Puertos mapeados<a class="headerlink" href="#212-puertos-mapeados" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>443:443</code>: Permite acceso HTTPS desde el exterior.</li>
+<li><code>8080:8080</code>: Habilita el acceso al panel de control de Traefik.</li>
+</ul>
+<h4 id="213-volumenes">2.1.3. Volúmenes<a class="headerlink" href="#213-volumenes" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>./letsencrypt:/letsencrypt</code>: Persistencia de los datos de Let's Encrypt.  </li>
+<li><code>/var/run/docker.sock:/var/run/docker.sock</code>: Permite a Traefik acceder al socket de Docker para detectar servicios. </li>
+</ul>
+<h4 id="214-el-servicio-whoami">2.1.4. El servicio whoami<a class="headerlink" href="#214-el-servicio-whoami" title="Permanent link">&para;</a></h4>
+<p>Observe ahora la descripción del servicio <code>whoami</code> en el fichero  <code>traefik.v1.yml</code> </p>
+<div class="highlight"><pre><span></span><code>services:
+
+  traefik:
+    # omitido
+
+  whoami:
+    image: &quot;traefik/whoami&quot;
+    container_name: &quot;simple-service&quot;
+    labels:
+      - &quot;traefik.enable=true&quot;
+      - &quot;traefik.http.routers.whoami.rule=Host(`whoami.angoies.tech`)&quot;
+      - &quot;traefik.http.routers.whoami.entrypoints=websecure&quot;
+      - &quot;traefik.http.routers.whoami.tls.certresolver=myresolver&quot;
+</code></pre></div>
+<p>Las <code>labels</code> son la clave para indicarle a Traefik como manejar este servicio. Las primeras son genéricas:
+- <code>traefik.enable=true</code>: Habilita la integración de este servicio con Traefik.
+- <code>traefik.http.routers.whoami.rule=Host(</code>whoami.angoies.tech<code>)</code>: Define una regla de enrutamiento basada en el host. Este servicio responderá a solicitudes dirigidas al dominio <code>whoami.angoies.tech</code>.</p>
+<p>Y las últimas son específicas de la configuración HTTPS:</p>
+<ul>
+<li><code>traefik.http.routers.whoami.entrypoints=websecure</code>: Asocia este servicio al punto de entrada HTTPS configurado (<code>websecure</code>).</li>
+<li><code>traefik.http.routers.whoami.tls.certresolver=myresolver</code>: Especifica que el certificado TLS para este servicio debe ser gestionado por el resolvedor <strong><code>myresolver</code></strong>. Recuerde que este nombre es el utilizado en la sección de <code>command</code> de traefik.</li>
+</ul>
+<h3 id="22-flujo-de-funcionamiento">2.2. Flujo de funcionamiento<a class="headerlink" href="#22-flujo-de-funcionamiento" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Inicio de Traefik</strong>:</li>
+<li>Traefik se inicia con la configuración especificada.</li>
+<li>
+<p>Detecta servicios habilitados en Docker a través del socket y sus etiquetas.</p>
+</li>
+<li>
+<p><strong>Configuración de HTTPS</strong>:</p>
+</li>
+<li>Cuando un cliente accede a <code>whoami.angoies.tech</code>, Traefik usa el resolvedor <code>myresolver</code> para gestionar el certificado TLS.</li>
+<li>La primera vez que se accede Let's Encrypt valida el dominio mediante un desafío TLS, y si el desafio es superado emite un certificado automáticamente. El certificado se almacena en el fichero <code>acme.json</code> del volumen. En siguintes peticiones basta comprobar que el certificado almaceando sigue siendo válido. </li>
+<li></li>
+<li><strong>Redirección</strong>:</li>
+<li>Traefik recibe las solicitudes HTTPS en el puerto 443. </li>
+<li>Según la regla definida (<code>Host</code>) las redirige al contenedor <code>whoami</code>.</li>
+</ol>
+<h3 id="23-consideraciones-adicionales">2.3. Consideraciones adicionales<a class="headerlink" href="#23-consideraciones-adicionales" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Seguridad</strong>:</li>
+<li>La opción <code>--api.insecure=true</code> expone el panel de control sin autenticación. Es recomendable deshabilitarlo (<code>--api=false</code>) o protegerlo en producción.</li>
+<li><strong>Los volúmenes y configuraciones relacionadas con Let's Encrypt deben ser persistentes</strong> y estar protegidos adecuadamente.</li>
+</ul>
+<h3 id="24-prueba-del-primer-escenario">2.4. Prueba del primer escenario<a class="headerlink" href="#24-prueba-del-primer-escenario" title="Permanent link">&para;</a></h3>
+<p>Basta hacer una petición con el comando <code>curl</code> para probar la conexión HTTPS al servicio whoami:</p>
+<div class="highlight"><pre><span></span><code>curl https://whoami.angoies.tech
+...
+</code></pre></div>
+<h2 id="3-anadir-un-servidor-web">3. Añadir un servidor web<a class="headerlink" href="#3-anadir-un-servidor-web" title="Permanent link">&para;</a></h2>
+<p>El segundo salto consite en añadir un segundo servicio a traefik que también use certificados. La configuración puede ampliarse fácilmente añadiendo servicios con etiquetas similares. </p>
+<p>En este caso (v2) se añade el servidor web <code>nginx</code>. </p>
+<div class="highlight"><pre><span></span><code>services:
+  traefik:
+    # omitido
+
+  whoami:
+    # omitido
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_server
+    labels:
+      - &quot;traefik.enable=true&quot;
+      - &quot;traefik.http.routers.nginx.rule=Host(`web.angoies.tech`)&quot;
+      - &quot;traefik.http.routers.nginx.entrypoints=websecure&quot;
+      - &quot;traefik.http.routers.nginx.tls.certresolver=myresolver&quot;
+</code></pre></div>
+<p>Observe que las labels son similares a las del servicio whoami </p>
+<ul>
+<li>se ha usado como nombre de ruta el nombre del servicio: <strong><code>zzz.routers.nginx.xxx=</code></strong></li>
+<li>se mantiene el nombre del resolver: <strong><code>xxx.certresolver=myresolver</code></strong>"</li>
+<li>y no olvide modificar el Host, en este caso es <code>web.angoies.tech</code></li>
+</ul>
+<h3 id="31-prueba">3.1. Prueba<a class="headerlink" href="#31-prueba" title="Permanent link">&para;</a></h3>
+<p>Basta con hacer una petición con el comando <code>curl</code> y probar la conexión HTTPS:</p>
+<div class="highlight"><pre><span></span><code>$ curl https://web.angoies.tech
+...
+</code></pre></div>
+<h2 id="4-redireccion-http-a-https">4. Redirección http a https<a class="headerlink" href="#4-redireccion-http-a-https" title="Permanent link">&para;</a></h2>
+<p>Hasta este momento los servicios sólo admiten trafico HTTPS, y las peticiones HTTP no funcionan (también sería posible configurar el acceso HTTP por separado del acceso a HTTPS). Pero en este paso vamos a modificar la configuración para que se establezca una redirección automática de tráfico HTTP (puerto 80) a HTTPS (puerto 443). Esto mejora la seguridad de los servicios al garantizar que todas las conexiones se realicen mediante un canal cifrado.</p>
+<p>Estas serían las líneas a añadir en la sección <code>command</code>  de traefik. Cada directiva en detalle:</p>
+<ol>
+<li>
+<p><strong><code>--entrypoints.web.address=:80</code></strong></p>
+<p>Esta línea define un <strong>punto de entrada</strong> (entrypoint) para manejar las solicitudes entrantes en el puerto <strong>80</strong> (HTTP). Permite que Traefik reciba tráfico HTTP para gestionarlo o redirigirlo a HTTPS según las reglas configuradas.</p>
+</li>
+<li>
+<p><strong><code>--entrypoints.web.http.redirections.entrypoint.to=websecure</code></strong></p>
+<p>Esta directiva configura una <strong>redirección automática</strong> desde el punto de entrada <code>web</code> (HTTP) hacia el punto de entrada <code>websecure</code> (HTTPS). <code>websecure</code> es el punto de entrada configurado previamente para manejar solicitudes HTTPS en el puerto 443. Su funcionamiento:
+1. Cuando un cliente realiza una solicitud HTTP en el puerto 80, Traefik detecta el tráfico y aplica esta regla de redirección.
+2. La solicitud es reenviada al punto de entrada seguro (<code>websecure</code>), donde se cifra la conexión utilizando TLS.</p>
+</li>
+<li>
+<p><strong><code>--entrypoints.web.http.redirections.entrypoint.scheme=https</code></strong></p>
+<p>Esta opción complementa la anterior al especificar que el esquema utilizado en la redirección será <strong>HTTPS</strong>. 
+- El esquema (<code>http</code> o <code>https</code>) define cómo se debe construir la nueva URL para el cliente redirigido.
+- En este caso, cualquier solicitud HTTP redirigida incluirá automáticamente <code>https://</code> en lugar de <code>http://</code> en la URL resultante.</p>
+<p>Por ejemplo:
+- Un cliente accede a <code>http://whoami.angoies.tech</code>.
+- Traefik genera una redirección a <code>https://whoami.angoies.tech</code>, cambiando el esquema y preservando el resto de la URL (ruta, parámetros, etc.).</p>
+</li>
+</ol>
+<blockquote>
+<p>Flujo Completo de Redirección</p>
+<ol>
+<li>Un cliente realiza una solicitud a un servicio utilizando HTTP en el puerto 80.</li>
+<li>Traefik escucha en el puerto 80 mediante el entrypoint <code>web</code>.</li>
+<li>Detecta que debe redirigir esa solicitud a <code>websecure</code>.</li>
+<li><strong>Genera una redirección</strong> 301 o 302 (según configuración predeterminada) hacia la misma URL, pero utilizando HTTPS.</li>
+<li>El cliente repite la solicitud al puerto 443 con una conexión cifrada.</li>
+</ol>
+</blockquote>
+<p>Ventajas de esta configuración</p>
+<ol>
+<li><strong>Seguridad mejorada</strong>: Garantiza que todo el tráfico se realiza mediante HTTPS, protegiendo contra ataques como el "man-in-the-middle".</li>
+<li><strong>Experiencia de usuario</strong>:Redirigir automáticamente elimina la necesidad de que los usuarios recuerden ingresar <code>https://</code> manualmente en sus navegadores.</li>
+<li><strong>Cumplimiento de estándares</strong>:Cumple con mejores prácticas y requisitos como los de SEO (Google prioriza sitios con HTTPS).</li>
+</ol>
+<blockquote>
+<p><strong>Aviso</strong>:  Compruebe que ya exista un entrypoint llamado <code>websecure</code> configurado para manejar el tráfico HTTPS (puerto 443) y asociado a un certificado TLS válido:
+<div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">--entryPoints.websecure.address=:443</span>
+<span class="l l-Scalar l-Scalar-Plain">--entryPoints.websecure.http.tls=true</span>
+</code></pre></div></p>
+</blockquote>
+<h3 id="41-prueba">4.1. Prueba<a class="headerlink" href="#41-prueba" title="Permanent link">&para;</a></h3>
+<p>Basta con hacer una petición con el comando <code>curl</code> y probar la conexión HTTPS. <strong>Para poder seguir la redireccion con <code>curl</code></strong> debe usar la opción <code>-L</code>:</p>
+<div class="highlight"><pre><span></span><code>$ curl http://whoami.angoies.tech
+...
+$ curl -L http://whoami.angoies.tech
+...
+$
+</code></pre></div>
+<h2 id="5-ficheros">5. Ficheros<a class="headerlink" href="#5-ficheros" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../src/traefik.v1.yml">traefik.v1.yml</a></li>
+<li><a href="../src/traefik.v2.yml">traefik.v2.yml</a></li>
+<li><a href="../src/traefik.v3.yml">traefik.v3.yml</a></li>
+</ul>
+<h2 id="6-anexos-de-ampliacion">6. Anexos de ampliación<a class="headerlink" href="#6-anexos-de-ampliacion" title="Permanent link">&para;</a></h2>
+<h3 id="61-desafio-tls-alpn-y-el-fichero-acmejson">6.1. desafío TLS-ALPN y el fichero acme.json<a class="headerlink" href="#61-desafio-tls-alpn-y-el-fichero-acmejson" title="Permanent link">&para;</a></h3>
+<p>El proceso para emitir un certificado TLS con Let's Encrypt utilizando el desafío <strong>TLS-ALPN-01</strong> incluye varios pasos esenciales. Este método garantiza que solo el propietario del dominio pueda obtener el certificado correspondiente. A continuación, se detalla el flujo de trabajo:</p>
+<ol>
+<li><strong>Inicio de la solicitud</strong>:</li>
+<li>
+<p>Traefik actúa como cliente de ACME y realiza una solicitud al servidor de Let's Encrypt para obtener un certificado para el dominio configurado (en este caso, <code>whoami.angoies.tech</code>).</p>
+</li>
+<li>
+<p><strong>Desafío TLS-ALPN-01</strong>:</p>
+</li>
+<li>Let's Encrypt requiere que el solicitante demuestre control sobre el dominio.</li>
+<li>En este método, Traefik configura temporalmente un certificado especial en el puerto 443. Este certificado se genera para cumplir con los requisitos específicos del desafío TLS-ALPN-01.</li>
+<li>
+<p>Let's Encrypt realiza una conexión directa al puerto 443 del dominio solicitado. Si la respuesta cumple con los datos esperados, se verifica que el solicitante controla el dominio.</p>
+</li>
+<li>
+<p><strong>Emisión del certificado</strong>:</p>
+</li>
+<li>Una vez validado el dominio, Let's Encrypt emite un certificado firmado.</li>
+<li>
+<p>Este certificado incluye información como el nombre del dominio, su validez y la clave pública correspondiente.</p>
+</li>
+<li>
+<p><strong>Renovación automática</strong>:</p>
+</li>
+<li>Traefik maneja automáticamente la renovación del certificado antes de que caduque. El proceso de validación se repite de forma periódica.</li>
+</ol>
+<h4 id="611-el-papel-del-archivo-acmejson">6.1.1. El papel del archivo <code>acme.json</code><a class="headerlink" href="#611-el-papel-del-archivo-acmejson" title="Permanent link">&para;</a></h4>
+<p>El archivo <code>acme.json</code> juega un papel crucial en la gestión de los certificados emitidos por Let's Encrypt. Aquí se almacena toda la información necesaria para operar de manera segura y eficiente:</p>
+<ol>
+<li><strong>Datos almacenados</strong>:</li>
+<li>Certificados TLS emitidos, incluyendo:<ul>
+<li>La clave privada asociada al certificado.</li>
+<li>La cadena de certificación completa (incluyendo el certificado raíz y los intermedios).</li>
+</ul>
+</li>
+<li>Tokens y configuraciones del protocolo ACME:<ul>
+<li>Información del desafío (como el token del TLS-ALPN-01).</li>
+</ul>
+</li>
+<li>
+<p>Estado y metadatos relacionados con las solicitudes ACME:</p>
+<ul>
+<li>Últimos intentos de renovación.</li>
+<li>Registros de errores (en caso de problemas de validación).</li>
+</ul>
+</li>
+<li>
+<p><strong>Formato del archivo</strong>:</p>
+</li>
+<li>
+<p>El archivo está en formato <strong>JSON</strong> y se cifra para evitar accesos no autorizados. Traefik es responsable de gestionar su lectura y escritura.</p>
+</li>
+<li>
+<p><strong>Persistencia del archivo</strong>:</p>
+</li>
+<li>Es fundamental que <code>acme.json</code> se mantenga en un volumen persistente (como se define en el YAML con <code>./letsencrypt:/letsencrypt</code>).</li>
+<li>Si el archivo se pierde, Traefik tendrá que reiniciar el proceso de validación desde cero, lo que puede causar interrupciones temporales.</li>
+</ol>
+<p>Para ver las fechas de renovación de los certificados puede ejecutar el comando <code>jq</code>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.myresolver.Certificates[] | &quot;\(.domain.main) \(.certificate)&quot;&#39;</span><span class="w"> </span>acme.json<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>domain<span class="w"> </span>cert<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Dominio: </span><span class="nv">$domain</span><span class="s2">&quot;</span><span class="p">;</span><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cert</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>x509<span class="w"> </span>-noout<span class="w"> </span>-startdate<span class="w"> </span>-enddate<span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;---------------------------&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+</code></pre></div></p>
+<h4 id="612-importancia-y-buenas-practicas">6.1.2. Importancia y buenas prácticas<a class="headerlink" href="#612-importancia-y-buenas-practicas" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>Seguridad</strong>:</li>
+<li>
+<p>Dado que <code>acme.json</code> contiene claves privadas y datos sensibles, debe protegerse adecuadamente. Esto incluye restringir el acceso mediante permisos adecuados y evitar su exposición en entornos públicos.</p>
+</li>
+<li>
+<p><strong>Rendimiento</strong>:</p>
+</li>
+<li>
+<p>Al reutilizar certificados almacenados en <code>acme.json</code>, se reduce la carga en el servidor de Let's Encrypt y se evita superar los límites de emisión.</p>
+</li>
+<li>
+<p><strong>Diagnóstico y solución de problemas</strong>:</p>
+</li>
+<li>Si hay problemas con la obtención o renovación de certificados, <code>acme.json</code> puede ser una fuente valiosa de información para investigar el problema. Y por supuesto <code>docker log</code> del servicio de traefik.</li>
+</ol>
+<h4 id="613-conexion-entre-el-desafio-y-acmejson">6.1.3. Conexión entre el desafío y <code>acme.json</code><a class="headerlink" href="#613-conexion-entre-el-desafio-y-acmejson" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Durante el desafío TLS-ALPN-01, los tokens generados por Let's Encrypt se almacenan temporalmente en memoria, pero los resultados de la validación y los certificados emitidos se guardan de manera permanente en <code>acme.json</code>.</li>
+<li>Cada vez que Traefik inicia, lee el archivo <code>acme.json</code> para cargar los certificados existentes y evitar nuevas solicitudes innecesarias.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
