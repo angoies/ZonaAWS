@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../../tema2/AWS_EC2/">
+        <link rel="prev" href="../AWS_traefik_certificados/">
       
       
-        <link rel="next" href="../../tema4/AWS_imagen_propia/">
+        <link rel="next" href="../../AWS_ejercicios/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Docker en AWS - ZonaAWS</title>
+        <title>IP Elástica - ZonaAWS</title>
       
     
     
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#aws-ec2-y-docker" class="md-skip">
+        <a href="#ip-elastica" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Docker en AWS
+              IP Elástica
             
           </span>
         </div>
@@ -251,31 +251,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Docker en AWS
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../tema3/AWS_EC2_docker/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -285,95 +264,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-instalar-docker-en-ec2" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Instalar Docker en EC2
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="1. Instalar Docker en EC2">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#11-post-instalacion" class="md-nav__link">
-    <span class="md-ellipsis">
-      1.1. Post-instalación
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12-prueba" class="md-nav__link">
-    <span class="md-ellipsis">
-      1.2. Prueba
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-instalacion-con-script-o-desde-plantilla" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Instalación con script o desde plantilla
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-desplegar-imagen-con-servidor-web" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Desplegar imagen con servidor web
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-terminar" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Terminar
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-usando-un-fichero-compose-y-scp" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Usando un fichero compose (y scp)
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -403,17 +293,19 @@
       
   
   
+    
   
   
+  
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -428,7 +320,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Traefik, AWS y SSL
@@ -442,7 +334,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tema5/AWS_traefik_certificados/" class="md-nav__link">
+      <a href="../AWS_traefik_certificados/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -461,10 +353,29 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../tema5/AWS_IP_elastica/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    IP Elástica
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -474,6 +385,75 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ip-elastica" class="md-nav__link">
+    <span class="md-ellipsis">
+      IP elástica
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IP elástica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-ip-elastica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Crear IP elástica
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asociar-la-ip-a-una-instancia-ec2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Asociar la IP a una instancia EC2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eliminar-asociacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminar asociación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#liberar-ip-elastica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Liberar IP elástica
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -611,8 +591,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -621,28 +599,46 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-instalar-docker-en-ec2" class="md-nav__link">
+  <a href="#ip-elastica" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Instalar Docker en EC2
+      IP elástica
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Instalar Docker en EC2">
+    <nav class="md-nav" aria-label="IP elástica">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-post-instalacion" class="md-nav__link">
+  <a href="#crear-ip-elastica" class="md-nav__link">
     <span class="md-ellipsis">
-      1.1. Post-instalación
+      Crear IP elástica
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-prueba" class="md-nav__link">
+  <a href="#asociar-la-ip-a-una-instancia-ec2" class="md-nav__link">
     <span class="md-ellipsis">
-      1.2. Prueba
+      Asociar la IP a una instancia EC2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eliminar-asociacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminar asociación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#liberar-ip-elastica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Liberar IP elástica
     </span>
   </a>
   
@@ -650,42 +646,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-instalacion-con-script-o-desde-plantilla" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Instalación con script o desde plantilla
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-desplegar-imagen-con-servidor-web" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Desplegar imagen con servidor web
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-terminar" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Terminar
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-usando-un-fichero-compose-y-scp" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Usando un fichero compose (y scp)
-    </span>
-  </a>
   
 </li>
       
@@ -705,120 +665,51 @@
 
 
 
-<h1 id="aws-ec2-y-docker">AWS, EC2 y Docker<a class="headerlink" href="#aws-ec2-y-docker" title="Permanent link">&para;</a></h1>
-<p>Se supone una instancia EC2 funcionando (ver prácticas previas) accesible mediante conexión ssh.</p>
-<h2 id="1-instalar-docker-en-ec2">1. Instalar Docker en EC2<a class="headerlink" href="#1-instalar-docker-en-ec2" title="Permanent link">&para;</a></h2>
-<p>La instalación de Docker en la instancia EC2 dependerá del Sistema Operativo. Puede usar el script que facilitan desde Docker. En este ejemplo se usa una instancia Debian:</p>
-<div class="highlight"><pre><span></span><code>admin@ip-172-31-55-39:~$ curl -fsSL https://get.docker.com -o get-docker.sh
-...
-admin@ip-172-31-55-39:~$ sudo sh get-docker.sh
-# Executing docker install script, commit: 66474034547a96caa0a25be56051ff8b726a1b28
-...
-admin@ip-172-31-55-39:~$
-</code></pre></div>
-<h3 id="11-post-instalacion">1.1. Post-instalación<a class="headerlink" href="#11-post-instalacion" title="Permanent link">&para;</a></h3>
-<p>Continue la instalación añadiendo el usuario de la instancia (<code>admin</code> en debian) al grupo <code>docker</code> y cerrando la conexión para que se reflejen los cambios (o ejecutar el comando <code>newgrp docker</code>).</p>
-<div class="highlight"><pre><span></span><code>admin@ip-172-31-55-39:~$sudo groupadd docker
-groupadd: group &#39;docker&#39; already exists
-admin@ip-172-31-55-39:~$ sudo usermod -aG docker $USER
-admin@ip-172-31-55-39:~$ newgrp docker
-admin@ip-172-31-55-39:~$
-</code></pre></div>
-<h3 id="12-prueba">1.2. Prueba<a class="headerlink" href="#12-prueba" title="Permanent link">&para;</a></h3>
-<p>Y pruebe el comando <code>docker</code>:</p>
-<div class="highlight"><pre><span></span><code>admin@ip-172-31-55-39:~$ docker run hello-world
-Unable to find image &#39;hello-world:latest&#39; locally
-latest: Pulling from library/hello-world
-2db29710123e: Pull complete 
-...
-Hello from Docker!
-...
-For more examples and ideas, visit:
- https://docs.docker.com/get-started/
-admin@ip-172-31-55-39:~$
-</code></pre></div>
-<h2 id="2-instalacion-con-script-o-desde-plantilla">2. Instalación con script o desde plantilla<a class="headerlink" href="#2-instalacion-con-script-o-desde-plantilla" title="Permanent link">&para;</a></h2>
-<p>Es posible ejecutar un script al lanzar la instancia EC2, en el apartado <strong>"Detalles Avanzados"</strong>. En ese apartado tiene la opción de incluir <strong>"Datos de usuario"</strong>. Incluso puede crear previamente una  plantilla de lanzamiento con dicho script. </p>
-<p>En el caso de la instalación de docker en debian el script sería similar a</p>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
-curl<span class="w"> </span>-fsSL<span class="w"> </span>https://get.docker.com<span class="w"> </span>-o<span class="w"> </span>get-docker.sh
-sudo<span class="w"> </span>sh<span class="w"> </span>get-docker.sh
-sudo<span class="w"> </span>groupadd<span class="w"> </span>docker
-sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span>admin
-</code></pre></div>
-<h2 id="3-desplegar-imagen-con-servidor-web">3. Desplegar imagen con servidor web<a class="headerlink" href="#3-desplegar-imagen-con-servidor-web" title="Permanent link">&para;</a></h2>
-<p>Pruebe a lanzar la imagen de un servidor <code>nginx</code> (redireccionando el puerto 80 del host al 80 del contenedor):</p>
-<div class="highlight"><pre><span></span><code>admin@ip-172-31-55-39:~$ docker run -d -p 80:80 --name web nginx
-...
-admin@ip-172-31-55-39:~$
-</code></pre></div>
-<p>Compruebe que esté funcionando el contenedor:</p>
-<div class="highlight"><pre><span></span><code>admin@ip-172-31-55-39:~$ docker ps
-CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                               NAMES
-3113d2a133ac   nginx     &quot;/docker-entrypoint.…&quot;   51 seconds ago   Up 50 seconds   0.0.0.0:80-&gt;80/tcp, :::80-&gt;80/tcp   web
-admin@ip-172-31-55-39:~$ 
-</code></pre></div>
-<p>Y pruebe el contenedor desde la propia instancia EC2:</p>
-<div class="highlight"><pre><span></span><code>admin@ip-172-31-55-39:~$ curl localhost
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;title&gt;Welcome to nginx!&lt;/title&gt;
-...
-&lt;/html&gt;
-admin@ip-172-31-55-39:~$ 
-</code></pre></div>
-<p>Termine probando el acceso desde el exterior (usando la IP o nombre público de la instancia EC2) con el comando <code>curl</code> o un navegador </p>
-<p><img alt="" src="../figuras/aws_12.png" /></p>
-<ul>
-<li>a la IP pública de la instancia:</li>
-</ul>
-<p><img alt="" src="../figuras/aws_13.png" /></p>
-<ul>
-<li>al nombre de la misma:</li>
-</ul>
-<p><img alt="" src="../figuras/aws_14.png" /></p>
-<h2 id="4-terminar">4. Terminar<a class="headerlink" href="#4-terminar" title="Permanent link">&para;</a></h2>
-<p>No olvide detener el contenedor (<code>docker rm -f web</code>), y si ha terminado detener (o terminar) la instancia EC2, cerrar la consola AWS y salir del laboratorio.</p>
-<h2 id="5-usando-un-fichero-compose-y-scp">5. Usando un fichero compose (y <code>scp</code>)<a class="headerlink" href="#5-usando-un-fichero-compose-y-scp" title="Permanent link">&para;</a></h2>
-<p>En el caso de que la aplicación a desplegar se configure en un fichero <code>compose.yml</code> el proceso sería:</p>
-<ol>
-<li>Copiar el fichero <code>docker-compose.yml</code> en la instancia EC2 con el comando <code>scp</code></li>
-<li>Desplegar con <code>docker compose up -d</code></li>
-<li>Comprobar el acceso a la aplicación</li>
-</ol>
-<p>Este podría ser un ejemplo de un fichero de despliegue <a href="../docker-compose.yml">docker-compose.yml</a> (en este caso Wordpress)</p>
-<div class="highlight"><span class="filename">docker-compose.yml</span><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+  <h1>IP Elástica</h1>
 
-<span class="w">  </span><span class="nt">wordpress</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wordpress</span>
-<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080:80</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">WORDPRESS_DB_HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
-<span class="w">      </span><span class="nt">WORDPRESS_DB_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exampleuser</span>
-<span class="w">      </span><span class="nt">WORDPRESS_DB_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">examplepass</span>
-<span class="w">      </span><span class="nt">WORDPRESS_DB_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exampledb</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wordpress:/var/www/html</span>
-
-<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql:8.0</span>
-<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">MYSQL_DATABASE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exampledb</span>
-<span class="w">      </span><span class="nt">MYSQL_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exampleuser</span>
-<span class="w">      </span><span class="nt">MYSQL_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">examplepass</span>
-<span class="w">      </span><span class="nt">MYSQL_RANDOM_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;1&#39;</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db:/var/lib/mysql</span>
-
-<span class="nt">volumes</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">wordpress</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
-</code></pre></div>
-<p><a href="../docker-compose.yml">docker-compose.yml</a></p>
+<h2 id="ip-elastica">IP elástica<a class="headerlink" href="#ip-elastica" title="Permanent link">&para;</a></h2>
+<h3 id="crear-ip-elastica">Crear IP elástica<a class="headerlink" href="#crear-ip-elastica" title="Permanent link">&para;</a></h3>
+<p>Acceder  a la consola de AWS, panel de instancias EC2. Allí hay un enlace a <em>Direcciones IP Elásticas</em></p>
+<p><img alt="" src="../../figuras/aws_ip_elastica_01.png" /></p>
+<p>En ese panel está el botón de <em>Asignar Dirección IP Elástica</em></p>
+<p><img alt="" src="../../figuras/aws_ip_elastica_02.png" /></p>
+<p>Al pulsarlo se abre un asistente. Deje las opciones por defecto y pulse "<em>Asignar</em>"</p>
+<p><img alt="" src="../../figuras/aws_ip_elastica_03.png" /></p>
+<p>Y el resultado lo puede ver en la siguiente pantalla donde se le indica la IP pública asignada</p>
+<p><img alt="" src="../../figuras/aws_ip_elastica_04.png" /></p>
+<h3 id="asociar-la-ip-a-una-instancia-ec2">Asociar la IP a una instancia EC2<a class="headerlink" href="#asociar-la-ip-a-una-instancia-ec2" title="Permanent link">&para;</a></h3>
+<p>Puede hacerlo justo tras crear la IP eléstica, tiene la opción arriba a la derecha</p>
+<p><img alt="" src="../../figuras/aws_ip_elastica_04.png" /></p>
+<p>Si pulsa el botón se muestra un asistente. Deje las opciones por defecto y sólo tiene que seleccionar la instancia a la que le quiere asignar esa IP:</p>
+<p><img alt="" src="../../figuras/aws_ip_elastica_05.png" /></p>
+<p>Introduzca su nombre o su id de instancia</p>
+<p><img alt="" src="../../figuras/aws_ip_elastica_06.png" /></p>
+<p><img alt="" src="../../figuras/aws_ip_elastica_07.png" /></p>
+<p>Una vez seleccioanda pulse el botón <em>Asociar</em></p>
+<p><img alt="" src="../../figuras/aws_ip_elastica_08.png" /></p>
+<p>Y puede ver la asociación en el menú de IP elásticas</p>
+<p><img alt="" src="../../figuras/aws_ip_elastica_09.png" /></p>
+<p>o en los datos de la instancia EC2</p>
+<p><img alt="" src="../../figuras/aws_ip_elastica_10.png" /></p>
+<h3 id="eliminar-asociacion">Eliminar asociación<a class="headerlink" href="#eliminar-asociacion" title="Permanent link">&para;</a></h3>
+<p>Puede hacerlo desde las opciones de la instancia EC2 o desde la pantalla de gestión de las IP elásticas. 
+En el caso que lo haga desde el panel de IP Elásticas tiene que seleccionar la IP, acceder al desplegable <strong>Acciones</strong> y usar la opción <em>Desasociar dirección IP Elástica</em></p>
+<p><img alt="" src="../../figuras/aws_ip_elastica_11.png" /></p>
+<p>Pulsa el botón <strong>Desasociar</strong> </p>
+<p><img alt="" src="../../figuras/aws_ip_elastica_12.png" /></p>
+<p>Y puede comprobar que la IP elástica ya no está asociada a la instancia. </p>
+<p>En el panel de IPs Elásticas</p>
+<p><img alt="" src="../../figuras/aws_ip_elastica_13.png" /></p>
+<h3 id="liberar-ip-elastica">Liberar IP elástica<a class="headerlink" href="#liberar-ip-elastica" title="Permanent link">&para;</a></h3>
+<p>Puede liberar la IP elástica (a veces lo llaman <em>Publicar</em>). Eso evite el coste asociado.</p>
+<p>Desde el panel de <em>IP Elásticas</em> selecciona la IP a Lineras, Acceda al Menú Acciones y selecciona la opción <em>Liberar...</em></p>
+<p><img alt="" src="../../figuras/aws_ip_elastica_15.png" /></p>
+<p>Le pide confirmación. Pulse el botón Publicar</p>
+<p><img alt="" src="../../figuras/aws_ip_elastica_16.png" /></p>
+<p>Tras pular se le indica con un mensaje que ha sido liberada u desaparece de la lista de IPs elásticas:</p>
+<p><img alt="" src="../../figuras/aws_ip_elastica_17.png" /></p>
+<p>Puede comprobarlo también en el panel de información de la instancia EC2</p>
+<p><img alt="" src="../../figuras/aws_ip_elastica_18.png" /></p>
 
 
 
