@@ -230,9 +230,19 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../tema2/AWS_EC2/" class="md-nav__link">
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
   
   <span class="md-ellipsis">
     EC2
@@ -240,7 +250,63 @@
   </span>
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            EC2
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/AWS_EC2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creación
+    
+  </span>
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/AWS_IP_elastica/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IP Elástica
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -335,28 +401,6 @@
   
   <span class="md-ellipsis">
     AWS y SSL
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tema5/AWS_IP_elastica/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    IP Elástica
     
   </span>
   
@@ -731,9 +775,9 @@ galeria<span class="w">      </span>latest<span class="w">    </span>1869ebdaf8f
 <li>Buscar servicio ECR</li>
 <li>Crear un repositorio con las opciones por defecto. En este ejemplo el nombre utilizado es <code>demo</code>.</li>
 </ol>
-<p><img alt="" src="../../figuras/aws_ecr_30.png" /></p>
+<p><img alt="../figuras/aws_ecr_30.png" src="../../figuras/aws_ecr_30.png" /></p>
 <p>La URI del repositorio en este caso es <code>800242693424.dkr.ecr.us-east-1.amazonaws.com/demo</code>. Para saber cómo etiquetar la imagen y enviarla al repositorio ECR debe pulsar el botón <strong>Ver Comandos de Envío</strong></p>
-<p><img alt="" src="../../figuras/aws_ecr_31.png" /></p>
+<p><img alt="../figuras/aws_ecr_31.png" src="../../figuras/aws_ecr_31.png" /></p>
 <p>Los pasos que le indica son:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># login: autenticarnos en el repositorio creado</span>
 $<span class="w"> </span>aws<span class="w"> </span>ecr<span class="w"> </span>get-login-password<span class="w"> </span>--region<span class="w"> </span>us-east-1<span class="w"> </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>AWS<span class="w"> </span>--password-stdin<span class="w"> </span><span class="m">800242693424</span>.dkr.ecr.us-east-1.amazonaws.com
@@ -747,7 +791,7 @@ $<span class="w"> </span>docker<span class="w"> </span>push<span class="w"> </sp
 <h2 id="4-instalacion-aws-cli">4. Instalación AWS CLI<a class="headerlink" href="#4-instalacion-aws-cli" title="Permanent link">&para;</a></h2>
 <p>Necesita instalar <em>AWS CLI:</em>
 <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#cliv2-linux-install">https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#cliv2-linux-install</a></p>
-<p><div class="highlight"><pre><span></span><code>~/galeria$<span class="w"> </span>curl<span class="w"> </span><span class="s2">&quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;awscliv2.zip&quot;</span>
+<div class="highlight"><pre><span></span><code>~/galeria$<span class="w"> </span>curl<span class="w"> </span><span class="s2">&quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;awscliv2.zip&quot;</span>
 ...
 ~/galeria$<span class="w"> </span>unzip<span class="w"> </span>awscliv2.zip
 ...
@@ -756,7 +800,7 @@ $<span class="w"> </span>docker<span class="w"> </span>push<span class="w"> </sp
 You<span class="w"> </span>can<span class="w"> </span>now<span class="w"> </span>run:<span class="w"> </span>/usr/local/bin/aws<span class="w"> </span>--version
 ~/galeria$<span class="w"> </span>
 </code></pre></div>
-Y comprobar la instalación:</p>
+<p>Y comprobar la instalación:</p>
 <div class="highlight"><pre><span></span><code>~/galeria$<span class="w"> </span>aws<span class="w"> </span>--version
 aws-cli/2.9.23<span class="w"> </span>Python/3.9.11<span class="w"> </span>Linux/5.10.0-19-amd64<span class="w"> </span>exe/x86_64.debian.11<span class="w"> </span>prompt/off
 ~/galeria$<span class="w"> </span>
@@ -768,14 +812,14 @@ Unable<span class="w"> </span>to<span class="w"> </span>locate<span class="w"> <
 Error:<span class="w"> </span>Cannot<span class="w"> </span>perform<span class="w"> </span>an<span class="w"> </span>interactive<span class="w"> </span>login<span class="w"> </span>from<span class="w"> </span>a<span class="w"> </span>non<span class="w"> </span>TTY<span class="w"> </span>device
 ~/galeria$<span class="w"> </span>
 </code></pre></div>
-<p>Y para poder ejecutar el comando <code>aws configure</code> necesita los datos de que le ofrece el <em>Learner Lab</em> en <strong>AWS Details</strong>. </p>
-<p><img alt="" src="../../figuras/aws_ecr_33.png" /></p>
+<p>Y para poder ejecutar el comando <code>aws configure</code> necesita los datos de que le ofrece el <em>Learner Lab</em> en <strong>AWS Details</strong>.</p>
+<p><img alt="../figuras/aws_ecr_33.png" src="../../figuras/aws_ecr_33.png" /></p>
 <p>El entorno de AWS Academy es un diferente al normal. En este caso harían falta dos ficheros, el de credenciales y el de configuración.</p>
 <h2 id="5-proceso-completo">5. Proceso completo<a class="headerlink" href="#5-proceso-completo" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
 <p>Login</p>
-<p><div class="highlight"><pre><span></span><code>~/galeria$<span class="w"> </span>aws<span class="w"> </span>ecr<span class="w"> </span>get-login-password<span class="w"> </span>--region<span class="w"> </span>us-east-1<span class="w"> </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>AWS<span class="w"> </span>--password-stdin<span class="w"> </span><span class="m">800242693424</span>.dkr.ecr.us-east-1.amazonaws.com
+<div class="highlight"><pre><span></span><code>~/galeria$<span class="w"> </span>aws<span class="w"> </span>ecr<span class="w"> </span>get-login-password<span class="w"> </span>--region<span class="w"> </span>us-east-1<span class="w"> </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>AWS<span class="w"> </span>--password-stdin<span class="w"> </span><span class="m">800242693424</span>.dkr.ecr.us-east-1.amazonaws.com
 WARNING!<span class="w"> </span>Your<span class="w"> </span>password<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>stored<span class="w"> </span>unencrypted<span class="w"> </span><span class="k">in</span><span class="w"> </span>/home/alu/.docker/config.json.
 Configure<span class="w"> </span>a<span class="w"> </span>credential<span class="w"> </span>helper<span class="w"> </span>to<span class="w"> </span>remove<span class="w"> </span>this<span class="w"> </span>warning.<span class="w"> </span>See
 https://docs.docker.com/engine/reference/commandline/login/#credentials-store
@@ -786,15 +830,19 @@ Logging<span class="w"> </span><span class="k">in</span><span class="w"> </span>
 For<span class="w"> </span>better<span class="w"> </span>security,<span class="w"> </span>log<span class="w"> </span><span class="k">in</span><span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>limited-privilege<span class="w"> </span>personal<span class="w"> </span>access<span class="w"> </span>token.<span class="w"> </span>Learn<span class="w"> </span>more<span class="w"> </span>at<span class="w"> </span>https://docs.docker.com/go/access-tokens/
 ~/galeria$
 </code></pre></div>
-1. Etiquetar</p>
-<p><div class="highlight"><pre><span></span><code>alu@xdebian11:~/galeria$<span class="w"> </span>docker<span class="w"> </span>tag<span class="w"> </span>galeria:latest<span class="w"> </span><span class="m">800242693424</span>.dkr.ecr.us-east-1.amazonaws.com/demo:latest
+</li>
+<li>
+<p>Etiquetar</p>
+<div class="highlight"><pre><span></span><code>alu@xdebian11:~/galeria$<span class="w"> </span>docker<span class="w"> </span>tag<span class="w"> </span>galeria:latest<span class="w"> </span><span class="m">800242693424</span>.dkr.ecr.us-east-1.amazonaws.com/demo:latest
 alu@xdebian11:~/galeria$<span class="w"> </span>docker<span class="w"> </span>images
 REPOSITORY<span class="w">                                          </span>TAG<span class="w">       </span>IMAGE<span class="w"> </span>ID<span class="w">       </span>CREATED<span class="w">          </span>SIZE
 <span class="m">800242693424</span>.dkr.ecr.us-east-1.amazonaws.com/demo<span class="w">   </span>latest<span class="w">    </span>1869ebdaf8f8<span class="w">   </span><span class="m">55</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">   </span>145MB
 galeria<span class="w">                                             </span>latest<span class="w">    </span>1869ebdaf8f8<span class="w">   </span><span class="m">55</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">   </span>145MB
 alu@xdebian11:~/galeria$
 </code></pre></div>
-1. Push</p>
+</li>
+<li>
+<p>Push</p>
 <div class="highlight"><pre><span></span><code>alu@xdebian11:~/galeria$<span class="w"> </span>docker<span class="w"> </span>push<span class="w"> </span><span class="m">800242693424</span>.dkr.ecr.us-east-1.amazonaws.com/demo
 Using<span class="w"> </span>default<span class="w"> </span>tag:<span class="w"> </span>latest
 The<span class="w"> </span>push<span class="w"> </span>refers<span class="w"> </span>to<span class="w"> </span>repository<span class="w"> </span><span class="o">[</span><span class="m">800242693424</span>.dkr.ecr.us-east-1.amazonaws.com/demo<span class="o">]</span>
@@ -810,7 +858,7 @@ alu@xdebian11:~/galeria$<span class="w"> </span>
 </ol>
 <h2 id="6-test-del-repositorio-ecr">6. Test del repositorio ECR<a class="headerlink" href="#6-test-del-repositorio-ecr" title="Permanent link">&para;</a></h2>
 <p>Para probar la imagen puede lanzarla en local (o en una instancia EC2). Recuerde que al ser el repositorio privado debe que hacer  login previamente (y eso obliga a tener configuradas las credenciales, etc.).</p>
-<p><div class="highlight"><pre><span></span><code><span class="gp">admin@ip-172-31-19-133:~/.aws$ </span>aws<span class="w"> </span>ecr<span class="w"> </span>get-login-password<span class="w"> </span>--region<span class="w"> </span>us-east-1<span class="w"> </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>AWS<span class="w"> </span>--password-stdin<span class="w"> </span><span class="m">800242693424</span>.dkr.ecr.us-east-1.amazonaws.com
+<div class="highlight"><pre><span></span><code><span class="gp">admin@ip-172-31-19-133:~/.aws$ </span>aws<span class="w"> </span>ecr<span class="w"> </span>get-login-password<span class="w"> </span>--region<span class="w"> </span>us-east-1<span class="w"> </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>AWS<span class="w"> </span>--password-stdin<span class="w"> </span><span class="m">800242693424</span>.dkr.ecr.us-east-1.amazonaws.com
 <span class="go">WARNING! Your password will be stored unencrypted in /home/admin/.docker/config.json.</span>
 <span class="go">Configure a credential helper to remove this warning. See</span>
 <span class="gp">https://docs.docker.com/engine/reference/commandline/login/#</span>credentials-store
@@ -818,7 +866,7 @@ alu@xdebian11:~/galeria$<span class="w"> </span>
 <span class="go">Login Succeeded</span>
 <span class="gp">admin@ip-172-31-19-133:~/.aws$ </span>
 </code></pre></div>
-Tras el login se descarga la imagen:</p>
+<p>Tras el login se descarga la imagen:</p>
 <div class="highlight"><pre><span></span><code>admin@ip-172-31-19-133:~/.aws$ docker pull 800242693424.dkr.ecr.us-east-1.amazonaws.com/galeriaclase:latest
 latest: Pulling from galeriaclase
 3f9582a2cbe7: Pull complete 
@@ -835,7 +883,7 @@ admin@ip-172-31-19-133:~/.aws$
 <span class="gp">admin@ip-172-31-19-133:~/.aws$ </span>
 </code></pre></div>
 <p>Se puede probar en local:</p>
-<p><div class="highlight"><pre><span></span><code><span class="gp">admin@ip-172-31-19-133:~/.aws$ </span>curl<span class="w"> </span>localhost
+<div class="highlight"><pre><span></span><code><span class="gp">admin@ip-172-31-19-133:~/.aws$ </span>curl<span class="w"> </span>localhost
 <span class="go">&lt;!DOCTYPE html&gt;</span>
 <span class="go">&lt;html lang=&quot;en&quot;&gt;</span>
 <span class="go">&lt;head&gt;</span>
@@ -849,11 +897,13 @@ admin@ip-172-31-19-133:~/.aws$
 <span class="go">&lt;/html&gt;</span>
 <span class="gp">admin@ip-172-31-19-133:~/.aws$ </span>
 </code></pre></div>
-Y sólo quedaría probar accediendo a la IP pública.</p>
+<p>Y sólo quedaría probar accediendo a la IP pública.</p>
 <h2 id="7-todo-anexo-aclaraciones-ec2">7. TODO Anexo Aclaraciones EC2<a class="headerlink" href="#7-todo-anexo-aclaraciones-ec2" title="Permanent link">&para;</a></h2>
-<p>Para poder descargar la imagen desde la instancia EC2 es necesario además de docker 
-- instalar AWS CLI
-- configurar AWS CLI (ficheros <code>credentials</code> y <code>config</code> en <code>.aws/</code>).</p>
+<p>Para poder descargar la imagen desde la instancia EC2 es necesario además de docker</p>
+<ul>
+<li>instalar AWS CLI</li>
+<li>configurar AWS CLI (ficheros <code>credentials</code> y <code>config</code> en <code>.aws/</code>).</li>
+</ul>
 <p>Nuestra plantilla de lanzamiento podría incluir como "Datos de usuario" la instalación de Docker y la de AWS CLI:</p>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 curl<span class="w"> </span>-fsSL<span class="w"> </span>https://get.docker.com<span class="w"> </span>-o<span class="w"> </span>get-docker.sh

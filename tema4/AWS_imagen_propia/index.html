@@ -232,9 +232,19 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../tema2/AWS_EC2/" class="md-nav__link">
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
   
   <span class="md-ellipsis">
     EC2
@@ -242,7 +252,63 @@
   </span>
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            EC2
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/AWS_EC2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creación
+    
+  </span>
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/AWS_IP_elastica/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IP Elástica
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -382,6 +448,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#6-propuesta-de-ejercicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Propuesta de ejercicio
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -438,28 +513,6 @@
   
   <span class="md-ellipsis">
     AWS y SSL
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tema5/AWS_IP_elastica/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    IP Elástica
     
   </span>
   
@@ -693,6 +746,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#6-propuesta-de-ejercicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Propuesta de ejercicio
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -711,7 +773,7 @@
 
 <h1 id="deploy-aplicacion-dockerizada">Deploy aplicación dockerizada<a class="headerlink" href="#deploy-aplicacion-dockerizada" title="Permanent link">&para;</a></h1>
 <h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
-<p>Práctica similar a las anteriores, el cambio es que la imagen utilizada es una imagen creada por el usuario.</p>
+<p>Práctica similar a las anteriores, la novedad es que la imagen docker utilizada es una imagen creada por el usuario.</p>
 <h2 id="2-probar-la-aplicacion-sin-dockerizar">2. Probar la aplicación sin <em>dockerizar</em><a class="headerlink" href="#2-probar-la-aplicacion-sin-dockerizar" title="Permanent link">&para;</a></h2>
 <p>Se le proporciona una aplicación Python que usa el <em>framework</em> Flask. No es propósito de la práctica avanzar en el uso de ese framework.</p>
 <p>Puede descargae el fichero <a href="../src/galeria.zip">galeria.zip</a></p>
@@ -731,7 +793,7 @@
 <span class="m">3</span><span class="w"> </span>directories,<span class="w"> </span><span class="m">6</span><span class="w"> </span>files
 ~/galeria$<span class="w"> </span>
 </code></pre></div>
-<p>Para probar la aplicación en local (y sin <em>dockerizar</em>) se crea un entorno virtual con venv, y se instalan las dependencias (<code>flask</code> y <code>gunicorn</code>) usando el fichero <code>requirements.txt</code>. </p>
+<p>Para probar la aplicación en local (y sin <em>dockerizar</em>) se crea un entorno virtual con venv, y se instalan las dependencias (<code>flask</code> y <code>gunicorn</code>) usando el fichero <code>requirements.txt</code>.</p>
 <div class="highlight"><pre><span></span><code>~/galeria$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
 ~/galeria$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>venv/bin/activate
 ...
@@ -753,17 +815,17 @@ Press<span class="w"> </span>CTRL+C<span class="w"> </span>to<span class="w"> </
 <span class="m">127</span>.0.0.1<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span><span class="o">[</span><span class="m">13</span>/Feb/2023<span class="w"> </span><span class="m">10</span>:30:32<span class="o">]</span><span class="w"> </span><span class="s2">&quot;GET /static/estilos.css HTTP/1.1&quot;</span><span class="w"> </span><span class="m">304</span><span class="w"> </span>-
 ...
 </code></pre></div>
-<p>Acceda a la URL http://127.0.0.1:5000 para comprobar que la aplicación funciona. Detenga la aplicación pulsando<code>Ctrl+C</code>.</p>
+<p>Acceda a la URL <a href="http://127.0.0.1:5000">http://127.0.0.1:5000</a> para comprobar que la aplicación funciona. Detenga la aplicación pulsando<code>Ctrl+C</code>.</p>
 <h3 id="21-prueba-con-servidor-de-aplicaciones">2.1. Prueba con servidor de aplicaciones<a class="headerlink" href="#21-prueba-con-servidor-de-aplicaciones" title="Permanent link">&para;</a></h3>
 <p>En un entorno de producción se usaría un servidor de aplicaciones. En este caso se usa <code>gunicorn</code> y la forma de invocarlo sería:</p>
-<p><div class="highlight"><pre><span></span><code><span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>gunicorn<span class="w"> </span>--chdir<span class="w"> </span>src<span class="w"> </span>app:app<span class="w"> </span>--bind<span class="w"> </span><span class="m">0</span>.0.0.0:5000<span class="w"> </span>--reload<span class="w"> </span>--access-logfile<span class="w"> </span>-
+<div class="highlight"><pre><span></span><code><span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>gunicorn<span class="w"> </span>--chdir<span class="w"> </span>src<span class="w"> </span>app:app<span class="w"> </span>--bind<span class="w"> </span><span class="m">0</span>.0.0.0:5000<span class="w"> </span>--reload<span class="w"> </span>--access-logfile<span class="w"> </span>-
 <span class="o">[</span><span class="m">2023</span>-02-13<span class="w"> </span><span class="m">10</span>:32:50<span class="w"> </span>+0100<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">3863</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Starting<span class="w"> </span>gunicorn<span class="w"> </span><span class="m">20</span>.1.0
 <span class="o">[</span><span class="m">2023</span>-02-13<span class="w"> </span><span class="m">10</span>:32:50<span class="w"> </span>+0100<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">3863</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Listening<span class="w"> </span>at:<span class="w"> </span>http://0.0.0.0:5000<span class="w"> </span><span class="o">(</span><span class="m">3863</span><span class="o">)</span>
 <span class="o">[</span><span class="m">2023</span>-02-13<span class="w"> </span><span class="m">10</span>:32:50<span class="w"> </span>+0100<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">3863</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Using<span class="w"> </span>worker:<span class="w"> </span>sync
 <span class="o">[</span><span class="m">2023</span>-02-13<span class="w"> </span><span class="m">10</span>:32:50<span class="w"> </span>+0100<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">3864</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Booting<span class="w"> </span>worker<span class="w"> </span>with<span class="w"> </span>pid:<span class="w"> </span><span class="m">3864</span>
 ...
 </code></pre></div>
-Acceda nuevamente a la URL para comprobar que la aplicación funciona. Las opciones de gunicorn <code>--reload --access-logfile -</code> se usan en desarrollo.</p>
+<p>Acceda nuevamente a la URL para comprobar que la aplicación funciona. Las opciones de gunicorn <code>--reload --access-logfile -</code> se usan en desarrollo.</p>
 <h2 id="3-generar-una-imagen-docker-con-la-aplicacion">3. Generar una imagen Docker con la aplicación<a class="headerlink" href="#3-generar-una-imagen-docker-con-la-aplicacion" title="Permanent link">&para;</a></h2>
 <p>Si todos los pasos anteriores son correctos está preparado para crear la imagen docker. El fichero <code>Dockerfile</code> a usar será similar a este:</p>
 <div class="highlight"><pre><span></span><code><span class="c"># start by pulling the python image</span>
@@ -803,16 +865,16 @@ hello-world<span class="w">    </span>latest<span class="w">    </span>feb5d9fea
 ...
 </code></pre></div>
 <h2 id="4-subir-la-imagen-a-dockerhub">4. Subir la imagen a Dockerhub<a class="headerlink" href="#4-subir-la-imagen-a-dockerhub" title="Permanent link">&para;</a></h2>
-<p>En prácticas previas se mostró como subir una imagen a Dockerhub. En primer lugar necesita renombrarla con su usuario en Dockerhub, y hacer  <em>push</em> de la imagen (puede ser que necesite hacer <code>docker login</code> antes). </p>
+<p>En prácticas previas se mostró como subir una imagen a Dockerhub. En primer lugar necesita renombrarla con su usuario en Dockerhub, y hacer  <em>push</em> de la imagen (puede ser que necesite hacer <code>docker login</code> antes).</p>
 <p>Primero se renombra la imagen galeria:</p>
-<p><div class="highlight"><pre><span></span><code><span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>docker<span class="w"> </span>tag<span class="w"> </span>galeriaflask:latest<span class="w"> </span>angoies/galeriaflask:latest<span class="w"> </span>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>docker<span class="w"> </span>tag<span class="w"> </span>galeriaflask:latest<span class="w"> </span>angoies/galeriaflask:latest<span class="w"> </span>
 <span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>docker<span class="w"> </span>image<span class="w"> </span>ls
 REPOSITORY<span class="w">             </span>TAG<span class="w">       </span>IMAGE<span class="w"> </span>ID<span class="w"> </span>CREATED<span class="w">          </span>SIZE
 angoies/galeriaflask<span class="w">   </span>latest<span class="w">    </span>eddfc7<span class="w">   </span><span class="m">10</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">   </span>145MB
 galeriaflask<span class="w">           </span>latest<span class="w">    </span>eddfc<span class="w">    </span><span class="m">10</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">   </span>145MB
 <span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>
 </code></pre></div>
-Haga login en DockerHub si es necesario y suba la imagen a DockerHub</p>
+<p>Haga login en DockerHub si es necesario y suba la imagen a DockerHub</p>
 <div class="highlight"><pre><span></span><code><span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>~/galeria$<span class="w"> </span>docker<span class="w"> </span>push<span class="w"> </span>angoies/galeriaflask:latest<span class="w"> </span>
 The<span class="w"> </span>push<span class="w"> </span>refers<span class="w"> </span>to<span class="w"> </span>repository<span class="w"> </span><span class="o">[</span>docker.io/angoies/galeriaflask<span class="o">]</span>
 8c1abd2be38e:<span class="w"> </span>Pushed<span class="w"> </span>
@@ -828,7 +890,7 @@ latest:<span class="w"> </span>digest:<span class="w"> </span>sha256:5cab61ff56e
 <ol>
 <li>
 <p>Conectar a EC2:</p>
-<p><div class="highlight"><pre><span></span><code>~/aws$<span class="w"> </span>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;vockey.pem&quot;</span><span class="w"> </span>admin@ec2-54-144-151-21.compute-1.amazonaws.com
+<div class="highlight"><pre><span></span><code>~/aws$<span class="w"> </span>ssh<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;vockey.pem&quot;</span><span class="w"> </span>admin@ec2-54-144-151-21.compute-1.amazonaws.com
 ...
 Debian<span class="w"> </span>GNU/Linux<span class="w"> </span>...<span class="w"> </span>permitted<span class="w"> </span>by<span class="w"> </span>applicable<span class="w"> </span>law.
 Last<span class="w"> </span>login:<span class="w"> </span>Sun<span class="w"> </span>Feb<span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">20</span>:02:42<span class="w"> </span><span class="m">2023</span><span class="w"> </span>from<span class="w"> </span><span class="m">81</span>.40.160.27
@@ -839,29 +901,37 @@ Docker<span class="w"> </span>version<span class="w"> </span><span class="m">23<
 
 admin@ip-172-31-55-39:~$<span class="w"> </span>
 </code></pre></div>
-2. Descargar la imagen:
+</li>
+<li>
+<p>Descargar la imagen:</p>
 <div class="highlight"><pre><span></span><code>admin@ip-172-31-55-39:~$<span class="w"> </span>docker<span class="w"> </span>pull<span class="w"> </span>angoies/galeriaflask
 Using<span class="w"> </span>default<span class="w"> </span>tag:<span class="w"> </span>latest
 ...
 docker.io/angoies/galeriaflask:latest
 admin@ip-172-31-55-39:~$<span class="w"> </span>
 </code></pre></div>
-3. Lanzar la imagen. Observe la redirección de puertos <code>-p 80:5000</code> ya que la aplicación espera conexiones en el puerto 5000 y la instancia EC2 está configurada para aceptar peticiones en el puerto 80:
+</li>
+<li>
+<p>Lanzar la imagen. Observe la redirección de puertos <code>-p 80:5000</code> ya que la aplicación espera conexiones en el puerto 5000 y la instancia EC2 está configurada para aceptar peticiones en el puerto 80:</p>
 <div class="highlight"><pre><span></span><code>admin@ip-172-31-55-39:~$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>-p<span class="w"> </span><span class="m">80</span>:5000<span class="w"> </span>angoies/galeriaflask
 <span class="o">[</span><span class="m">2023</span>-02-13<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">7</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Starting<span class="w"> </span>gunicorn<span class="w"> </span><span class="m">20</span>.1.0
 <span class="o">[</span><span class="m">2023</span>-02-13<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">7</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Listening<span class="w"> </span>at:<span class="w"> </span>http://0.0.0.0:5000<span class="w"> </span><span class="o">(</span><span class="m">7</span><span class="o">)</span>
 <span class="o">[</span><span class="m">2023</span>-02-13<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">7</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Using<span class="w"> </span>worker:<span class="w"> </span>sync
 <span class="o">[</span><span class="m">2023</span>-02-13<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">8</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Booting<span class="w"> </span>worker<span class="w"> </span>with<span class="w"> </span>pid:<span class="w"> </span><span class="m">8</span>
 </code></pre></div>
-4. Probar que la aplicación es accesible.Compruebe la IP
-<img alt="" src="../../figuras/aws_20.png" /></p>
+</li>
+<li>
+<p>Probar que la aplicación es accesible.Compruebe la IP
+    <img alt="../figuras/aws_20.png" src="../../figuras/aws_20.png" /></p>
 <p>Y acceda a la misma:</p>
-<p><img alt="" src="../../figuras/aws_21.png" /></p>
+<p><img alt="../figuras/aws_21.png" src="../../figuras/aws_21.png" /></p>
 </li>
 <li>
 <p>No olvide terminar la instancia EC2 y salir ordenadamente de la consola AWS y del Learner Lab.</p>
 </li>
 </ol>
+<h2 id="6-propuesta-de-ejercicio">6. Propuesta de ejercicio<a class="headerlink" href="#6-propuesta-de-ejercicio" title="Permanent link">&para;</a></h2>
+<p>Crear un fichero <code>docker-compose.yml</code> para el despliegue. Utilizarlo en las puebas en local y en el despliegue en AWS EC2.</p>
 
 
 

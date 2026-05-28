@@ -12,7 +12,7 @@
         <link rel="prev" href="../../tema1/AWS_intro/">
       
       
-        <link rel="next" href="../../tema3/AWS_EC2_docker/">
+        <link rel="next" href="../AWS_IP_elastica/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>EC2 - ZonaAWS</title>
+        <title>Creación - ZonaAWS</title>
       
     
     
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              EC2
+              Creación
             
           </span>
         </div>
@@ -234,6 +234,44 @@
   
   
   
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    EC2
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            EC2
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
@@ -246,7 +284,7 @@
           
   
   <span class="md-ellipsis">
-    EC2
+    Creación
     
   </span>
   
@@ -258,7 +296,7 @@
         
   
   <span class="md-ellipsis">
-    EC2
+    Creación
     
   </span>
   
@@ -326,20 +364,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-script-en-lanzamiento-de-la-instancia" class="md-nav__link">
+  <a href="#6-plantillas-de-lanzamiento" class="md-nav__link">
     <span class="md-ellipsis">
-      6. Script en lanzamiento de la instancia
+      6. Plantillas de lanzamiento
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-plantillas-de-lanzamiento" class="md-nav__link">
+  <a href="#7-script-en-lanzamiento-de-la-instancia" class="md-nav__link">
     <span class="md-ellipsis">
-      7. Plantillas de lanzamiento
+      7. Script en lanzamiento de la instancia
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="7. Script en lanzamiento de la instancia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-instancia-con-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1. Instancia con docker
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -382,6 +435,36 @@
     </ul>
   
 </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AWS_IP_elastica/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IP Elástica
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -477,28 +560,6 @@
   
   <span class="md-ellipsis">
     AWS y SSL
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tema5/AWS_IP_elastica/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    IP Elástica
     
   </span>
   
@@ -718,20 +779,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-script-en-lanzamiento-de-la-instancia" class="md-nav__link">
+  <a href="#6-plantillas-de-lanzamiento" class="md-nav__link">
     <span class="md-ellipsis">
-      6. Script en lanzamiento de la instancia
+      6. Plantillas de lanzamiento
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-plantillas-de-lanzamiento" class="md-nav__link">
+  <a href="#7-script-en-lanzamiento-de-la-instancia" class="md-nav__link">
     <span class="md-ellipsis">
-      7. Plantillas de lanzamiento
+      7. Script en lanzamiento de la instancia
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="7. Script en lanzamiento de la instancia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-instancia-con-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1. Instancia con docker
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -792,35 +868,35 @@
 <h2 id="1-abrir-la-consola-aws-desde-lab">1. Abrir la consola AWS desde Lab<a class="headerlink" href="#1-abrir-la-consola-aws-desde-lab" title="Permanent link">&para;</a></h2>
 <p>Tiene enlaces en el tema de introducción de cómo hacerlo. Acceder a AWS Academy, luego al Learner Lab, etc.</p>
 <h2 id="2-crear-instancia-ec2">2. Crear instancia EC2<a class="headerlink" href="#2-crear-instancia-ec2" title="Permanent link">&para;</a></h2>
-<p>Tiene como referencia este vídeo <a href="https://www.youtube.com/watch?v=cX80gnEHs_E&amp;list=PLr35b7rSarzizDIWK4eKyl6mY4V_HxERi&amp;index=7">cómo crear un instancia EC2</a> en AWS Academy. </p>
+<p>Tiene como referencia este vídeo <a href="https://www.youtube.com/watch?v=cX80gnEHs_E&amp;list=PLr35b7rSarzizDIWK4eKyl6mY4V_HxERi&amp;index=7">cómo crear un instancia EC2</a> en AWS Academy.</p>
 <p>Los pasos a dar son:</p>
 <ol>
 <li>Seleccionar una imagen  de la capa gratuita (en este ejemplo se usa Debian, pero podría usarse Ubuntu o una AMI Linux de AWS).</li>
-<li>Seleccionar un tipo de instancia de la capa gratuita. </li>
+<li>Seleccionar un tipo de instancia de la capa gratuita.</li>
 <li>
 <p>Usar el par de claves de inicio de sesión <code>vockey</code> (accesibles en la plataforma de <em>Learner Lab</em> en "AWS Details")
-    <img alt="" src="../../figuras/aws_01_vockey.png" /></p>
+    <img alt="aws_01_vockey.png" src="../../figuras/aws_01_vockey.png" /></p>
 </li>
 <li>
 <p>Crear un grupo de seguridad que permita trafico ssh, HTTP y HTTPS (se puede modificar posteriormente),</p>
 </li>
-<li>Dejar el almacenamiento por defecto </li>
-<li>Lanzar la instancia. </li>
+<li>Dejar el almacenamiento por defecto</li>
+<li>Lanzar la instancia.</li>
 </ol>
 <p>En la consola AWS puede comprobar el estado de la instancia y sus detalles, en particular su nombre  e IP públicos. También se puede acceder al grupo de seguridad creado, etc.</p>
 <blockquote>
 <p>Nota: puede que le resulte más cómodo trabajar con un par de claves creadas (previamente o en el momento de lanzar la instancia). En este caso al usar Linux se usa el formato pem y tipo ED255129. Al pulsar el botón "Crear par de claves" se descarga el fichero con la clave privada creada que usará luego para la conexión ssh.</p>
 </blockquote>
 <h2 id="3-conexion-ssh-a-la-instancia-ec2">3. Conexión <code>ssh</code> a la instancia EC2<a class="headerlink" href="#3-conexion-ssh-a-la-instancia-ec2" title="Permanent link">&para;</a></h2>
-<p>Desde el panel de la instancia en ejecución puede usar el botón "Conectar" y acceder a la información de cómo conectarse a la instancia. </p>
-<p>En el caso de ssh hay una pestaña con instrucciones y el comando necesario. </p>
+<p>Desde el panel de la instancia en ejecución puede usar el botón "Conectar" y acceder a la información de cómo conectarse a la instancia.</p>
+<p>En el caso de ssh hay una pestaña con instrucciones y el comando necesario.</p>
 <h2 id="4-instalar-servidor-web">4. Instalar servidor web<a class="headerlink" href="#4-instalar-servidor-web" title="Permanent link">&para;</a></h2>
 <p>Para instalar un servidor web debe estar conectado a la instancia con ssh. Una vez conectado puede instalar <code>nginx-light</code> o <code>nginx</code> (o <code>httpd</code>):</p>
 <div class="highlight"><pre><span></span><code>admin@ip-172-31-50-215:~$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
 admin@ip-172-31-50-215:~$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>nginx
 admin@ip-172-31-50-215:~$<span class="w"> </span>
 </code></pre></div>
-<p>Puede probar el servidor en la propia instancia EC2 con <code>curl</code> </p>
+<p>Puede probar el servidor en la propia instancia EC2 con <code>curl</code></p>
 <div class="highlight"><pre><span></span><code>admin@ip-172-31-50-215:~$<span class="w"> </span>curl<span class="w"> </span>localhost
 &lt;!DOCTYPE<span class="w"> </span>html&gt;
 &lt;html&gt;
@@ -834,44 +910,60 @@ admin@ip-172-31-50-215:~$
 <h2 id="5-detener-las-instancias">5. Detener las instancias<a class="headerlink" href="#5-detener-las-instancias" title="Permanent link">&para;</a></h2>
 <p>Una vez terminado el ejercicio no olvide:</p>
 <ol>
-<li><strong>Detener</strong> las instancias. </li>
+<li><strong>Detener</strong> las instancias.</li>
 <li>Si no son necesarias posteriormente <strong>Terminarlas</strong>.</li>
 <li>Cerrar la sesión en la consola AWS.</li>
 <li>Detener el laboratorio en el  <em>Learner Lab</em>.</li>
 </ol>
-<h2 id="6-script-en-lanzamiento-de-la-instancia">6. Script en lanzamiento de la instancia<a class="headerlink" href="#6-script-en-lanzamiento-de-la-instancia" title="Permanent link">&para;</a></h2>
-<p>Se podría haber realizado la instalación del servidor web mediante un script en el momento de crear la instancia. El lugar para incluir estos scripts es el apartado <strong>"Detalles Avanzados"</strong> durante el lanzamiento de la imagen. En ese apartado está la opción de incluir <strong>"Datos de usuario"</strong>. Tiene maś información en este enlace: <a href="https://docs.aws.amazon.com/es_es/AWSEC2/latest/UserGuide/user-data.html">https://docs.aws.amazon.com/es_es/AWSEC2/latest/UserGuide/user-data.html</a></p>
-<p>El script podría ser similar a este (dependerá de la imagen elegida y de la aplicación a instalar):</p>
+<h2 id="6-plantillas-de-lanzamiento">6. Plantillas de lanzamiento<a class="headerlink" href="#6-plantillas-de-lanzamiento" title="Permanent link">&para;</a></h2>
+<p>En AWS Academy, una plantilla de lanzamiento (<em>launch template</em>) es un recurso que define la configuración para lanzar instancias de EC2, incluyendo la AMI, el tipo de instancia, el par de claves, los grupos de seguridad y otros parámetros. Permite estandarizar y simplificar el proceso de creación de instancias.</p>
+<p>Se recomienda tener un plantilla de  sus principales configuraciones: cometerá menos errores de configuración y ahorrará tiempo.</p>
+<h2 id="7-script-en-lanzamiento-de-la-instancia">7. Script en lanzamiento de la instancia<a class="headerlink" href="#7-script-en-lanzamiento-de-la-instancia" title="Permanent link">&para;</a></h2>
+<p>Al lanzar una instancia (o al crear una plantilla de lanzamiento) se puede incluir un script que realice tareas adicionales tras la creación, como por ejemplo la instalación de un servidor web.</p>
+<p>El lugar para incluir estos scripts es el apartado <strong>"Detalles Avanzados"</strong> durante el lanzamiento de la imagen. En ese apartado está la opción de incluir <strong>"Datos de usuario"</strong>. Tiene maś información en este enlace: <a href="https://docs.aws.amazon.com/es_es/AWSEC2/latest/UserGuide/user-data.html">https://docs.aws.amazon.com/es_es/AWSEC2/latest/UserGuide/user-data.html</a></p>
+<p>El script dependerá de la imagen elegida y de la aplicación a instalar, pero siguiendo el ejemplo anterior en Debian pdoría ser:</p>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 sudo<span class="w"> </span>apt<span class="w"> </span>update
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>nginx
 </code></pre></div>
-<p>El script dependerá del sistema operativo de la imagen elegida. En el caso de la imagen de AWS el gestor de paquetes es <code>yum</code> y sería algo similar a </p>
+<p>Puede observarlo en estas capturas, como acceder a <em>Detalles Avanzados</em></p>
+<p><img alt="../figuras/aws_30_ec2_detalles_avanzados.png" src="../../figuras/aws_30_ec2_detalles_avanzados.png" /></p>
+<p>E incluir el script en la zona de <em>Datos Usuario</em>:</p>
+<p><img alt="../figuras/aws_31_ec2_d.png" src="../../figuras/aws_31_ec2_datos_usuario.png" /></p>
+<blockquote>
+<p>En el caso de la imagen de AWS el gestor de paquetes es <code>yum</code> y sería algo similar a</p>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 sudo<span class="w"> </span>yum<span class="w"> </span>update<span class="w"> </span>-y
 sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>httpd<span class="w"> </span>-y
 sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>httpd
 sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>httpd
 </code></pre></div>
-<h2 id="7-plantillas-de-lanzamiento">7. Plantillas de lanzamiento<a class="headerlink" href="#7-plantillas-de-lanzamiento" title="Permanent link">&para;</a></h2>
-<p>En AWS Academy, una plantilla de lanzamiento (launch template) es un recurso que define la configuración para lanzar instancias de EC2, incluyendo la AMI, el tipo de instancia, el par de claves, los grupos de seguridad y otros parámetros. Permite estandarizar y simplificar el proceso de creación de instancias.</p>
-<p>En este caso es posible incluir el script de instalación en la plantilla.  Tiene maś información en este enlace: <a href="https://docs.aws.amazon.com/es_es/AWSEC2/latest/UserGuide/user-data.html">https://docs.aws.amazon.com/es_es/AWSEC2/latest/UserGuide/user-data.html</a>.</p>
+</blockquote>
+<h3 id="71-instancia-con-docker">7.1. Instancia con docker<a class="headerlink" href="#71-instancia-con-docker" title="Permanent link">&para;</a></h3>
+<p>En el caso particular que desee una instancia debian con docker ya instalado el script podría ser:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+curl<span class="w"> </span>-fsSL<span class="w"> </span>https://get.docker.com<span class="w"> </span>-o<span class="w"> </span>get-docker.sh
+sudo<span class="w"> </span>sh<span class="w"> </span>get-docker.sh
+sudo<span class="w"> </span>groupadd<span class="w"> </span>docker
+sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span>admin
+</code></pre></div>
+<p><img alt="../figuras/aws_32_ec2_detalles_avanzados.png" src="../../figuras/aws_32_ec2_datos_usuario_docker.png" /></p>
+<blockquote>
+<p>Aviso: tenga en cuenta que por ejemplo en una instancia Ubuntu el usuario por defecto es <code>ubuntu</code> y en ese caso habría que modificar la última línea del script.</p>
+</blockquote>
 <h2 id="8-ip-elastica">8. IP elástica<a class="headerlink" href="#8-ip-elastica" title="Permanent link">&para;</a></h2>
-<p>Las IP asignadas a las instancias (y sus nombres) no son fijos, cambian al detener o reiniciar la instancia EC2. Por lo tanto si detiene la instancia y la arranca más tarde la IP y su nombre asociado pueden cambiar.</p>
-<p>Para evitarlo se puede usar una IP <strong>elástica</strong>, pero <strong>tenga en cuenta que tendrá coste aunque la instancia EC2 esté detenida</strong>. </p>
-<p>Puede consultar estos recursos:</p>
-<ul>
-<li>Vídeo explicando uso IP elástica: <a href="https://www.youtube.com/watch?v=trZLt2jJp4c">https://www.youtube.com/watch?v=trZLt2jJp4c</a></li>
-<li>Docs AWS sobre IP elástica: <a href="https://docs.aws.amazon.com/es_es/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html?icmpid=docs_ec2_console">https://docs.aws.amazon.com/es_es/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html?icmpid=docs_ec2_console</a></li>
-</ul>
+<p>Las IPs públicas asignadas a las instancias (y sus nombres) no son fijos, cambian al detener o reiniciar la instancia EC2. Por lo tanto si detiene la instancia y la arranca más tarde la IP y su nombre asociado pueden cambiar.</p>
+<p>Para configurar un IP elástica (fija) puede seguir este documento:
+<a href="../AWS_IP_elastica/">Configura IP elástica en AWS - EC2</a></p>
+<p>Tenga en cuenta que <strong>configurar una IP elástica tendrá coste aunque no esté asociada a la instancia o la instancia este detenida.</strong></p>
 <h2 id="9-dns">9. DNS<a class="headerlink" href="#9-dns" title="Permanent link">&para;</a></h2>
 <p>Por otra parte podría querer usar una dominio propio para su instancia EC2. Tiene entre otras las siguientes opciones gratuitas:</p>
 <ul>
-<li>Dynu: https://www.dynu.com/</li>
-<li>Duckdns: https://www.duckdns.org/</li>
+<li>Dynu: <a href="https://www.dynu.com/">https://www.dynu.com/</a></li>
+<li>Duckdns: <a href="https://www.duckdns.org/">https://www.duckdns.org/</a></li>
 <li><a href="https://www.gnutomorrow.com/best-free-dynamic-dns-services/">Listado de opciones gratuitas</a></li>
 </ul>
-<p>Deberá asociar en el dominio creado la IP elástica de AWS. </p>
+<p>Deberá asociar en el dominio creado la IP elástica de AWS.</p>
 <h2 id="10-uso-del-comando-scp">10. Uso del comando scp<a class="headerlink" href="#10-uso-del-comando-scp" title="Permanent link">&para;</a></h2>
 <p>Si tiene en su equipo local su sitio web comprimido puede subirlo a la instancia EC2 con el comando <code>scp</code> cómo se indica en<br />
 <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/linux-file-transfer-scp.html">Transfer files to a Linux instance using SCP</a></p>
@@ -889,10 +981,10 @@ admin@ip-172-31-50-215:~$<span class="w"> </span>sudo<span class="w"> </span>unz
 <p>Como ejercicio puede desplegar un sitio web ya creado previamente (disponible  en un fichero comprimido). Para ello:</p>
 <ul>
 <li>Debe acceder al directorio por defecto del servidor, en el caso de <code>ningx</code> el directorio  <code>/var/www/html</code></li>
-<li>Borrar el fichero índice </li>
+<li>Borrar el fichero índice</li>
 <li>Descomprimir el fichero comprimido</li>
 </ul>
-<p>Algo similar a </p>
+<p>Algo similar a</p>
 <div class="highlight"><pre><span></span><code>admin@ip-172-31-50-215:~$<span class="w"> </span>wget<span class="w"> </span>https://sanvalero-static-webs.s3.eu-west-1.amazonaws.com/breakout.zip
 admin@ip-172-31-50-215:~$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/var/www/html/
 admin@ip-172-31-50-215:~$<span class="w"> </span>sudo<span class="w"> </span>rm<span class="w"> </span>index.nginx-debian.html

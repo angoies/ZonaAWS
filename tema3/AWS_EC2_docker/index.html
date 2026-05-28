@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../../tema2/AWS_EC2/">
+        <link rel="prev" href="../../tema2/AWS_IP_elastica/">
       
       
         <link rel="next" href="../../tema4/AWS_imagen_propia/">
@@ -232,9 +232,19 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../tema2/AWS_EC2/" class="md-nav__link">
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
   
   <span class="md-ellipsis">
     EC2
@@ -242,7 +252,63 @@
   </span>
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            EC2
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/AWS_EC2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creación
+    
+  </span>
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/AWS_IP_elastica/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IP Elástica
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -353,18 +419,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-terminar" class="md-nav__link">
+  <a href="#4-detener-oy-terminar-la-instancia" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Terminar
+      4. Detener o/y terminar la instancia
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-usando-un-fichero-compose-y-scp" class="md-nav__link">
+  <a href="#5-despliegue-usando-un-fichero-compose-y-scp" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Usando un fichero compose (y scp)
+      5. Despliegue usando un fichero compose (y scp)
     </span>
   </a>
   
@@ -447,28 +513,6 @@
   
   <span class="md-ellipsis">
     AWS y SSL
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tema5/AWS_IP_elastica/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    IP Elástica
     
   </span>
   
@@ -694,18 +738,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-terminar" class="md-nav__link">
+  <a href="#4-detener-oy-terminar-la-instancia" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Terminar
+      4. Detener o/y terminar la instancia
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-usando-un-fichero-compose-y-scp" class="md-nav__link">
+  <a href="#5-despliegue-usando-un-fichero-compose-y-scp" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Usando un fichero compose (y scp)
+      5. Despliegue usando un fichero compose (y scp)
     </span>
   </a>
   
@@ -760,14 +804,18 @@ For more examples and ideas, visit:
 admin@ip-172-31-55-39:~$
 </code></pre></div>
 <h2 id="2-instalacion-con-script-o-desde-plantilla">2. Instalación con script o desde plantilla<a class="headerlink" href="#2-instalacion-con-script-o-desde-plantilla" title="Permanent link">&para;</a></h2>
-<p>Es posible ejecutar un script al lanzar la instancia EC2, en el apartado <strong>"Detalles Avanzados"</strong>. En ese apartado tiene la opción de incluir <strong>"Datos de usuario"</strong>. Incluso puede crear previamente una  plantilla de lanzamiento con dicho script. </p>
-<p>En el caso de la instalación de docker en debian el script sería similar a</p>
+<p>En el apartado de creación de una EC2 ya se comentó la posibilidad de ejecutar un script al lanzar la instancia EC2 (o al crear un plantilla), en el apartado <strong>"Detalles Avanzados"</strong>. En ese apartado tiene la opción de incluir <strong>"Datos de usuario"</strong>.</p>
+<p><img alt="../figuras/aws_32_ec2_datos_usuario_docker.png" src="../../figuras/aws_32_ec2_datos_usuario_docker.png" /></p>
+<p>El script sería similar a</p>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 curl<span class="w"> </span>-fsSL<span class="w"> </span>https://get.docker.com<span class="w"> </span>-o<span class="w"> </span>get-docker.sh
 sudo<span class="w"> </span>sh<span class="w"> </span>get-docker.sh
 sudo<span class="w"> </span>groupadd<span class="w"> </span>docker
 sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span>admin
 </code></pre></div>
+<blockquote>
+<p>Aviso: tenga en cuenta que por ejemplo en una instancia Ubuntu el usuario por defecto es <code>ubuntu</code> y en ese caso habría que modificar la última línea del script.</p>
+</blockquote>
 <h2 id="3-desplegar-imagen-con-servidor-web">3. Desplegar imagen con servidor web<a class="headerlink" href="#3-desplegar-imagen-con-servidor-web" title="Permanent link">&para;</a></h2>
 <p>Pruebe a lanzar la imagen de un servidor <code>nginx</code> (redireccionando el puerto 80 del host al 80 del contenedor):</p>
 <div class="highlight"><pre><span></span><code>admin@ip-172-31-55-39:~$ docker run -d -p 80:80 --name web nginx
@@ -790,26 +838,26 @@ admin@ip-172-31-55-39:~$
 &lt;/html&gt;
 admin@ip-172-31-55-39:~$ 
 </code></pre></div>
-<p>Termine probando el acceso desde el exterior (usando la IP o nombre público de la instancia EC2) con el comando <code>curl</code> o un navegador </p>
-<p><img alt="" src="../figuras/aws_12.png" /></p>
+<p>Termine probando el acceso desde el exterior (usando la IP o nombre público de la instancia EC2) con el comando <code>curl</code> o un navegador</p>
+<p><img alt="figuras/aws_12.png" src="../figuras/aws_12.png" /></p>
 <ul>
 <li>a la IP pública de la instancia:</li>
 </ul>
-<p><img alt="" src="../figuras/aws_13.png" /></p>
+<p><img alt="figuras/aws_13.png" src="../figuras/aws_13.png" /></p>
 <ul>
 <li>al nombre de la misma:</li>
 </ul>
-<p><img alt="" src="../figuras/aws_14.png" /></p>
-<h2 id="4-terminar">4. Terminar<a class="headerlink" href="#4-terminar" title="Permanent link">&para;</a></h2>
-<p>No olvide detener el contenedor (<code>docker rm -f web</code>), y si ha terminado detener (o terminar) la instancia EC2, cerrar la consola AWS y salir del laboratorio.</p>
-<h2 id="5-usando-un-fichero-compose-y-scp">5. Usando un fichero compose (y <code>scp</code>)<a class="headerlink" href="#5-usando-un-fichero-compose-y-scp" title="Permanent link">&para;</a></h2>
+<p><img alt="figuras/aws_14.png" src="../figuras/aws_14.png" /></p>
+<h2 id="4-detener-oy-terminar-la-instancia">4. Detener o/y terminar la instancia<a class="headerlink" href="#4-detener-oy-terminar-la-instancia" title="Permanent link">&para;</a></h2>
+<p>No olvide detener el contenedor (<code>docker rm -f web</code>), y si ha terminado <strong>detener</strong> (o terminar) la instancia EC2. Se recomienda además cerrar la consola AWS y salir del laboratorio online.</p>
+<h2 id="5-despliegue-usando-un-fichero-compose-y-scp">5. Despliegue usando un fichero compose (y <code>scp</code>)<a class="headerlink" href="#5-despliegue-usando-un-fichero-compose-y-scp" title="Permanent link">&para;</a></h2>
 <p>En el caso de que la aplicación a desplegar se configure en un fichero <code>compose.yml</code> el proceso sería:</p>
 <ol>
 <li>Copiar el fichero <code>docker-compose.yml</code> en la instancia EC2 con el comando <code>scp</code></li>
 <li>Desplegar con <code>docker compose up -d</code></li>
 <li>Comprobar el acceso a la aplicación</li>
 </ol>
-<p>Este podría ser un ejemplo de un fichero de despliegue <a href="../docker-compose.yml">docker-compose.yml</a> (en este caso Wordpress)</p>
+<p>Este podría ser un ejemplo de un fichero de despliegue <a href="../docker-compose.yml">docker-compose.yml</a> (en este caso de Wordpress)</p>
 <div class="highlight"><span class="filename">docker-compose.yml</span><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 
 <span class="w">  </span><span class="nt">wordpress</span><span class="p">:</span>
@@ -840,7 +888,6 @@ admin@ip-172-31-55-39:~$
 <span class="w">  </span><span class="nt">wordpress</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">db</span><span class="p">:</span>
 </code></pre></div>
-<p><a href="../docker-compose.yml">docker-compose.yml</a></p>
 
 
 

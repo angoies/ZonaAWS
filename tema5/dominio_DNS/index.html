@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../AWS_IP_elastica/">
+        <link rel="prev" href="../AWS_traefik_certificados/">
       
       
         <link rel="next" href="../../AWS_ejercicios/">
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-introduccion" class="md-skip">
+        <a href="#introduccion" class="md-skip">
           Skip to content
         </a>
       
@@ -232,9 +232,19 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../tema2/AWS_EC2/" class="md-nav__link">
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
   
   <span class="md-ellipsis">
     EC2
@@ -242,7 +252,63 @@
   </span>
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            EC2
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/AWS_EC2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creación
+    
+  </span>
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/AWS_IP_elastica/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IP Elástica
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -353,28 +419,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../AWS_IP_elastica/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    IP Elástica
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -383,6 +427,8 @@
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
+      
+        
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
@@ -414,21 +460,14 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-introduccion" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Introducción
-    </span>
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#2-dominio-en-dynu" class="md-nav__link">
@@ -664,21 +703,14 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-introduccion" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Introducción
-    </span>
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#2-dominio-en-dynu" class="md-nav__link">
@@ -789,18 +821,17 @@
 
 
 
-  <h1>DNS</h1>
-
-<h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
+<h1 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h1>
 <p>Objetivo: asociar la IP de una instancia EC2 a un nombre de dominio. Para conseguir un nombre de dominio para su IP sin coste hay varias opciones, entre ellas:</p>
 <ul>
 <li>Dynu: <a href="https://www.dynu.com/en-US/">https://www.dynu.com/en-US/</a></li>
+<li><a href="https://freemyip.com/">freemyip.com</a>, no es necesario registrarse. <a href="https://freemyip.com/help">Ayuda</a></li>
 <li>get.tech</li>
-<li><em>duckdns</em>: Admite wildcards xxx.midominio.duckdns.org y admite registros tipo TXT. <a href="https://duckdns.org">https://duckdns.org</a> </li>
-<li><em>noip.com</em>: <a href="https://www.noip.com/es-MX/free">https://www.noip.com/es-MX/free</a> </li>
+<li><em>duckdns</em>: Admite wildcards xxx.midominio.duckdns.org y admite registros tipo TXT. <a href="https://duckdns.org">https://duckdns.org</a></li>
+<li><em>noip.com</em>: <a href="https://www.noip.com/es-MX/free">https://www.noip.com/es-MX/free</a></li>
 <li><em>FreeDNS</em>:  <a href="http://freedns.afraid.org">http://freedns.afraid.org</a></li>
 <li><em>Nominalia</em>:  primer año gratis, pero hay que dar tarjeta <a href="https://www.nominalia.com/">https://www.nominalia.com/</a></li>
-<li>Freenom (parece que no funciona): <a href="https://www.freenom.com/">https://www.freenom.com/</a> </li>
+<li>Freenom (parece que no funciona): <a href="https://www.freenom.com/">https://www.freenom.com/</a></li>
 </ul>
 <p>Además en el caso de la instancia AWS del laboratorio habría que resolver el que la IP va cambiando al detener y reiniciar la instancia. Posibles soluciones:</p>
 <ol>
@@ -816,9 +847,9 @@
 <p>Puede añadir un dominio en el menú <em>DDNS</em>, opción <em>SIGN UP</em>. Este debería ser el enlace:</p>
 <p><a href="https://www.dynu.com/en-US/ControlPanel/AddDDNS">https://www.dynu.com/en-US/ControlPanel/AddDDNS</a></p>
 <p>Debe usar la opción <em>Option 1: Use Our Domain Name</em>, seleccionar uno de sus dominios en el desplegable y elegir un Nombre de Host. Luego pulsar el botón  <em>Add</em></p>
-<p><img alt="" src="../../figuras/dns_dynu_01.png" /></p>
+<p><img alt="../figuras/dns_dynu_01.png" src="../../figuras/dns_dynu_01.png" /></p>
 <p>Una vez creado le muestra el dominio y observe que de formaautomática le ha asignado una IP a ese dominio. Esa IP es la del equipo del que se está conectando, y lo habitual es que sea la IP pública del router de la red desde la que se esté conectando en ese momento.</p>
-<p><img alt="" src="../../figuras/dns_dynu_02.png" /></p>
+<p><img alt="../figuras/dns_dynu_02.png" src="../../figuras/dns_dynu_02.png" /></p>
 <p><strong>Importante</strong>:</p>
 <ul>
 <li>Esa <strong>IPv4 Address</strong> será la que deberá sustitutir por la IP Elásctica de su instancia EC2.</li>
@@ -853,23 +884,21 @@
 <ul>
 <li>Duck DNS: <a href="https://www.duckdns.org/">https://www.duckdns.org/</a></li>
 <li>noip DNS: <a href="https://my.noip.com/dynamic-dns/duc">https://my.noip.com/dynamic-dns/duc</a></li>
-<li>Otros:<ul>
+<li>Otros:</li>
 <li>Best Free Dynamic DNS Services: <a href="https://www.gnutomorrow.com/best-free-dynamic-dns-services/">https://www.gnutomorrow.com/best-free-dynamic-dns-services/</a></li>
 <li>Freedns <a href="https://freedns.afraid.org/">https://freedns.afraid.org/</a> y  Dynamic DNS: <a href="https://freedns.afraid.org/dynamic/">https://freedns.afraid.org/dynamic/</a></li>
 <li>Namecheap: <a href="https://www.namecheap.com/">https://www.namecheap.com/</a> y Nc.me: Namecheap is giving university students a free bundle to kickstart their online presence.: <a href="https://nc.me/">https://nc.me/</a></li>
-</ul>
-</li>
 <li>¿Qué son las direcciones IP elásticas de AWS y qué hacen? <a href="https://es.linux-console.net/?p=7127#google_vignette">https://es.linux-console.net/?p=7127#google_vignette</a></li>
 <li>Configurar DNS dinámico en la instancia de Amazon Linux - Amazon Elastic Compute Cloud
-https://docs.aws.amazon.com/es_es/AWSEC2/latest/UserGuide/dynamic-dns.html</li>
+<a href="https://docs.aws.amazon.com/es_es/AWSEC2/latest/UserGuide/dynamic-dns.html">https://docs.aws.amazon.com/es_es/AWSEC2/latest/UserGuide/dynamic-dns.html</a></li>
 </ul>
 <h2 id="ejercicio-practico">Ejercicio práctico<a class="headerlink" href="#ejercicio-practico" title="Permanent link">&para;</a></h2>
 <p>En este ejemplo se usa por ejemplo la AMI Linux de AWS de 2023 (basada en Fedora).</p>
 <ol>
 <li>Crear una instancia EC2 Amazon Linux 2023</li>
 <li>
-<p>Instalar <code>nginx</code> en esa instancia
-    <div class="highlight"><pre><span></span><code>[ec2-user@ip-172-31-18-67 ~]$ sudo dnf install -y nginx
+<p>Instalar <code>nginx</code> en esa instancia</p>
+<div class="highlight"><pre><span></span><code>[ec2-user@ip-172-31-18-67 ~]$ sudo dnf install -y nginx
 Last metadata expiration check: 0:00:49 ago on Sat Oct 28 13:13:01 2023.
 Dependencies resolved.
 
@@ -877,11 +906,11 @@ Dependencies resolved.
 
 Complete!
 [ec2-user@ip-172-31-18-67 ~]$ 
-</code></pre></div></p>
+</code></pre></div>
 </li>
 <li>
-<p>Iniciar el servidor
-    <div class="highlight"><pre><span></span><code>[ec2-user@ip-172-31-18-67 ~]$ sudo systemctl start nginx
+<p>Iniciar el servidor</p>
+<div class="highlight"><pre><span></span><code>[ec2-user@ip-172-31-18-67 ~]$ sudo systemctl start nginx
 [ec2-user@ip-172-31-18-67 ~]$ sudo systemctl status nginx
 ● nginx.service - The nginx HTTP and reverse proxy server
     Loaded: loaded (/usr/lib/systemd/system/nginx.service; disabled; preset: disabled)
@@ -889,11 +918,11 @@ Complete!
 ...
 Oct 28 13:15:30 ip-172-31-18-67.ec2.internal systemd[1]: Started nginx.service - The nginx HTTP and reverse proxy server.
 [ec2-user@ip-172-31-18-67 ~]$ 
-</code></pre></div></p>
+</code></pre></div>
 </li>
 <li>
-<p>Probar servidor en local con <code>curl</code>
-    <div class="highlight"><pre><span></span><code>[ec2-user@ip-172-31-18-67 ~]$ curl localhost
+<p>Probar servidor en local con <code>curl</code></p>
+<div class="highlight"><pre><span></span><code>[ec2-user@ip-172-31-18-67 ~]$ curl localhost
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -904,11 +933,11 @@ Oct 28 13:15:30 ip-172-31-18-67.ec2.internal systemd[1]: Started nginx.service -
 &lt;/body&gt;
 &lt;/html&gt;
 [ec2-user@ip-172-31-18-67 ~]$ 
-</code></pre></div></p>
+</code></pre></div>
 </li>
 <li>
-<p>Habilitar arranque en reinicio:
-    <div class="highlight"><pre><span></span><code>[ec2-user@ip-172-31-18-67 ~]$ sudo systemctl enable nginx
+<p>Habilitar arranque en reinicio:</p>
+<div class="highlight"><pre><span></span><code>[ec2-user@ip-172-31-18-67 ~]$ sudo systemctl enable nginx
 Created symlink /etc/systemd/system/multi-user.target.wants/nginx.service → /usr/lib/systemd/system/nginx.service.
 [ec2-user@ip-172-31-18-67 ~]$ sudo systemctl status nginx
 ● nginx.service - The nginx HTTP and reverse proxy server
@@ -917,14 +946,14 @@ Created symlink /etc/systemd/system/multi-user.target.wants/nginx.service → /u
 ...
 Oct 28 13:15:30 ip-172-31-18-67.ec2.internal systemd[1]: Started nginx.service - The nginx HTTP and reverse proxy server.
 [ec2-user@ip-172-31-18-67 ~]$ 
-</code></pre></div></p>
+</code></pre></div>
 </li>
 <li>
 <p>Anotar la IP pública de la instancia EC2 y crear registro DNS.</p>
 </li>
 <li>
-<p>Esperar a las actualizaciones DNS y desde un equipo probar el nombre de dominio
-    <div class="highlight"><pre><span></span><code>clases@d12:~$ curl www.midominio.duckdns.org
+<p>Esperar a las actualizaciones DNS y desde un equipo probar el nombre de dominio</p>
+<div class="highlight"><pre><span></span><code>clases@d12:~$ curl www.midominio.duckdns.org
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -936,17 +965,17 @@ Oct 28 13:15:30 ip-172-31-18-67.ec2.internal systemd[1]: Started nginx.service -
 &lt;/body&gt;
 &lt;/html&gt;
 clases@d12:~$ 
-</code></pre></div></p>
+</code></pre></div>
 </li>
 </ol>
 <blockquote>
 <p><strong>Aviso</strong>: al reiniciar la EC2 cambia la IP.</p>
-<p><strong>Ayuda</strong>: Para instalar <code>nginx</code> directamente al crear la instancia (o desde plantilla de instancia)
-<div class="highlight"><pre><span></span><code>#!/bin/bash
-sudo dnf install -y nginx
-sudo systemctl enable nginx
-sudo systemctl start nginx
-</code></pre></div></p>
+<p><strong>Ayuda</strong>: Para instalar <code>nginx</code> directamente al crear la instancia (o desde plantilla de instancia)</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>nginx
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>nginx
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>nginx
+</code></pre></div>
 </blockquote>
 
 

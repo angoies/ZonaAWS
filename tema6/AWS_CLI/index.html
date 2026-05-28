@@ -232,9 +232,19 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../tema2/AWS_EC2/" class="md-nav__link">
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
   
   <span class="md-ellipsis">
     EC2
@@ -242,7 +252,63 @@
   </span>
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            EC2
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/AWS_EC2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creación
+    
+  </span>
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/AWS_IP_elastica/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IP Elástica
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -337,28 +403,6 @@
   
   <span class="md-ellipsis">
     AWS y SSL
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tema5/AWS_IP_elastica/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    IP Elástica
     
   </span>
   
@@ -757,7 +801,7 @@
 <h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
 <p>Este documento tiene como base una práctica de un compañero que llamaremos <code>DOCBASE</code>:</p>
 <blockquote>
-<p>[DOCBASE] IAW - Práctica 13.1 
+<p>[DOCBASE] IAW - Práctica 13.1
 IAW - Implantación de Aplicaciones Web
 IES Celia Viñas (Almería) - 2022/2023
 <a href="https://josejuansanchez.org/iaw/practica-aws-cli/index.html">https://josejuansanchez.org/iaw/practica-aws-cli/index.html</a></p>
@@ -772,7 +816,7 @@ IES Celia Viñas (Almería) - 2022/2023
 </code></pre></div>
 <h2 id="3-configuracion-credenciales">3. Configuración credenciales<a class="headerlink" href="#3-configuracion-credenciales" title="Permanent link">&para;</a></h2>
 <p>Esta parte se puede hacer usando el comando <code>aws configure</code>, que crea el directorio "<em>oculto</em>" <code>.aws</code> y dentro los ficheros <code>config</code> y <code>credentials</code>. A este último fichero <strong>es necesario añadirle manualmente</strong> el campo <code>aws_session_token</code>. Los datos necesarios del token se obtienen en el <em>Learner Lab</em>,  en el apartado <strong>AWS Details</strong>.</p>
-<p><img alt="" src="../../figuras/aws_cli_aws_details.png" /></p>
+<p><img alt="../figuras/aws_cli_aws_details.png" src="../../figuras/aws_cli_aws_details.png" /></p>
 <p>El resultado final del contenido de los ficheros será similar a este:</p>
 <div class="highlight"><pre><span></span><code><span class="go">~/.aws$ cat config </span>
 <span class="go">[default]</span>
@@ -806,7 +850,7 @@ IES Celia Viñas (Almería) - 2022/2023
 <span class="go">~$</span>
 </code></pre></div>
 <h2 id="5-mostrar-informacion-ec2">5. Mostrar información EC2<a class="headerlink" href="#5-mostrar-informacion-ec2" title="Permanent link">&para;</a></h2>
-<p>Para consultar información sobre las instancias EC2 se usa el comando  <code>aws ec2 describe-instances</code> que por defecto da toda la información disponible en formato JSON.  Si quiere obtener parte de la información use la opción <code>--query</code>, y para modificar el formato de salida <code>--output</code>. </p>
+<p>Para consultar información sobre las instancias EC2 se usa el comando  <code>aws ec2 describe-instances</code> que por defecto da toda la información disponible en formato JSON.  Si quiere obtener parte de la información use la opción <code>--query</code>, y para modificar el formato de salida <code>--output</code>.</p>
 <p>En este ejemplo se muestran los id de las instancias y si estas están en ejecución:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>aws<span class="w"> </span>ec2<span class="w"> </span>describe-instances<span class="w"> </span><span class="se">\</span>
 --query<span class="w"> </span>Reservations<span class="o">[</span>*<span class="o">]</span>.Instances<span class="o">[</span>*<span class="o">]</span>.<span class="o">[</span>InstanceId,State.Name<span class="o">]</span><span class="w"> </span><span class="se">\</span>
@@ -895,11 +939,13 @@ IES Celia Viñas (Almería) - 2022/2023
   --tags Key=Name,Value=&quot;MiNombreInstancia&quot;
 </code></pre></div>
 <h2 id="8-utilidad-scripts-basicos">8. Utilidad: scripts básicos<a class="headerlink" href="#8-utilidad-scripts-basicos" title="Permanent link">&para;</a></h2>
-<p>Se pueden incluir en el directorio <code>~/bin</code> del usuario scripts para trabajar con las instancias EC2. Operaciones básicas como:
-- listar
-- detener instancias activas
-- iniciar instancias detenidas 
-- o terminar todas las instancias</p>
+<p>Se pueden incluir en el directorio <code>~/bin</code> del usuario scripts para trabajar con las instancias EC2. Operaciones básicas como:</p>
+<ul>
+<li>listar</li>
+<li>detener instancias activas</li>
+<li>iniciar instancias detenidas</li>
+<li>o terminar todas las instancias</li>
+</ul>
 <p>He aquí ejemplos de esos posibles scripts:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># aws-ls.sh</span>
 aws<span class="w"> </span>ec2<span class="w"> </span>describe-instances<span class="w"> </span><span class="se">\</span>
@@ -936,9 +982,9 @@ aws<span class="w"> </span>ec2<span class="w"> </span>terminate-instances<span c
 $<span class="w"> </span>
 </code></pre></div>
 <p>Ejemplos de las ejecución:</p>
-<ol>
+<ul>
 <li>Listar</li>
-</ol>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>aws-ls.sh
 <span class="go">-------------------------------------------------------------------------------</span>
 <span class="go">|                              DescribeInstances                              |</span>
@@ -948,9 +994,9 @@ $<span class="w"> </span>
 <span class="go">+----------------------+-------------------------+----------+-----------------+</span>
 <span class="gp">$ </span>
 </code></pre></div>
-<ol>
+<ul>
 <li>Detener todas las instancias:</li>
-</ol>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="gp">$  </span>aws-stop.sh
 <span class="go">{</span>
 <span class="go">    &quot;StoppingInstances&quot;: [</span>
@@ -969,9 +1015,9 @@ $<span class="w"> </span>
 <span class="go">}</span>
 <span class="gp">$ </span>
 </code></pre></div>
-<ol>
+<ul>
 <li>Comprobar</li>
-</ol>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>aws-ls.sh
 <span class="go">-------------------------------------------------------------------------------</span>
 <span class="go">|                              DescribeInstances                              |</span>
@@ -981,9 +1027,9 @@ $<span class="w"> </span>
 <span class="go">+----------------------+-------------------------+----------+-----------------+</span>
 <span class="gp">$ </span>
 </code></pre></div>
-<ol>
+<ul>
 <li>Terminarlas</li>
-</ol>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>aws-kill.sh<span class="w"> </span>
 <span class="go">{</span>
 <span class="go">    &quot;TerminatingInstances&quot;: [</span>
@@ -1002,9 +1048,9 @@ $<span class="w"> </span>
 <span class="go">}</span>
 <span class="gp">$ </span>
 </code></pre></div>
-<ol>
+<ul>
 <li>Comprobar</li>
-</ol>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>aws-ls.sh
 <span class="go">----------------------------------------------------------------------------------</span>
 <span class="go">|                                DescribeInstances                               |</span>

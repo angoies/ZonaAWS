@@ -12,7 +12,7 @@
         <link rel="prev" href="../../tema4/AWS_imagen_propia/">
       
       
-        <link rel="next" href="../AWS_IP_elastica/">
+        <link rel="next" href="../dominio_DNS/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -232,9 +232,19 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../tema2/AWS_EC2/" class="md-nav__link">
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
   
   <span class="md-ellipsis">
     EC2
@@ -242,7 +252,63 @@
   </span>
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            EC2
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/AWS_EC2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creación
+    
+  </span>
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/AWS_IP_elastica/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IP Elástica
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -625,28 +691,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../AWS_IP_elastica/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    IP Elástica
-    
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -1077,7 +1121,7 @@
 <p>Para el desarrollo de la práctica se partirá de:</p>
 <ul>
 <li>una instancia EC2 en AWS con docker ya instalado (debe poder acceder a la instancia usando ssh).</li>
-<li>una IP elástica asociada a la instancia (para poder asociarla a un dominio DNS). </li>
+<li>una IP elástica asociada a la instancia (para poder asociarla a un dominio DNS).</li>
 </ul>
 <h3 id="12-dominio-dns">1.2. Dominio DNS<a class="headerlink" href="#12-dominio-dns" title="Permanent link">&para;</a></h3>
 <p>Necesita un dominio a gestionar para asociar nombres de host a la IP elástica usada en la instancia EC2 de AWS. Tiene entre otras las siguientes opciones gratuitas:</p>
@@ -1090,16 +1134,16 @@
 <li>Buscar y seleccionar un dominio libre</li>
 <li>Al ordenar el pago hay un botón para identificarse con su cuenta de GitHub (la que esté asociada a los beneficios del <em>github student developer pack</em>).</li>
 <li>Al usar esa opción el coste del dominio debe ser gratis durante un año.</li>
-<li>Para gestionar el dominio acceda a <a href="http://controlpanel.tech/customer">http://controlpanel.tech/customer.</a>. </li>
+<li>Para gestionar el dominio acceda a <a href="http://controlpanel.tech/customer">http://controlpanel.tech/customer.</a>.</li>
 </ol>
 </li>
 </ul>
-<p>Para el desarrollo de este enunciado y sus ejemplos se ha creado el dominio <code>angoies.tech</code> y se le ha asociado la IP elástica de la instancia EC2 de AWS. Además se han creado dos registros de tipo CNAME: <code>whoami.angoies.tech</code> y <code>web.angoies.tech</code>  asociados a  <code>angoies.tech</code>. Deberá hacer algo similar con su dominio. </p>
+<p>Para el desarrollo de este enunciado y sus ejemplos se ha creado el dominio <code>angoies.tech</code> y se le ha asociado la IP elástica de la instancia EC2 de AWS. Además se han creado dos registros de tipo CNAME: <code>whoami.angoies.tech</code> y <code>web.angoies.tech</code>  asociados a  <code>angoies.tech</code>. Deberá hacer algo similar con su dominio.</p>
 <blockquote>
 <p>Otra opción es crear un dominio en Dynu (o Duckdns). En el caso de Dynu se parte de dominios de segundo nivel, por ejemplo <code>freeddns.org</code>. En ese caso el dominio creado podría ser <code>clases.freeddns.org</code>, y se le asocia la IP elástica de la instancia EC2 de AWS a ese dominio. Además se pueden crear registros de tipo CNAME: <code>whoami.clases.freeddns.org</code> y <code>web.clases.freeddns.org</code>  asociados a  <code>clases.freeddns.org</code>. De todas formas tanto Dynu como duckdns admiten <strong>wildcards</strong> en el dominio por lo que no haría falta crear los CNAMEs si apuntan todos a la misma IP.</p>
 </blockquote>
 <h2 id="2-traefik-lets-encript-y-el-servicio-whoami">2. Traefik, Let's Encript y el servicio  whoami<a class="headerlink" href="#2-traefik-lets-encript-y-el-servicio-whoami" title="Permanent link">&para;</a></h2>
-<p>En este apartado verá un primer ejemplo donde se expone el servicio de prueba <code>whoami</code> <strong>mediante https</strong>. Para ello necesitaría un certificado válido en el servidor <code>whoami</code>. Y como Traefik hace funciones de proxy inverso <strong>el certificado se instalará en Traefik</strong>. </p>
+<p>En este apartado verá un primer ejemplo donde se expone el servicio de prueba <code>whoami</code> <strong>mediante https</strong>. Para ello necesitaría un certificado válido en el servidor <code>whoami</code>. Y como Traefik hace funciones de proxy inverso <strong>el certificado se instalará en Traefik</strong>.</p>
 <p>Let’s Encrypt es una Autoridad de Certificación gratuita, automatizada, y abierta. Si tiene acceso ssh a su servidor puede obtener un certificado utilizando el cliente que ellos propocionan. Como indican en su web:</p>
 <blockquote>
 <p>Recomendamos que la mayoría de las personas con acceso shell usen el cliente ACME llamado Certbot. Éste puede automatizar la emisión e instalación de certificados con cero tiempo de inactividad. También tiene modos de expertos para personas que no quieren autoconfiguración. Es fácil de usar, funciona en muchos sistemas operativos, y tiene documentación genial. Visita la página web de Certbot para conseguir instrucciones para tu sistema operativo y servidor de web.  </p>
@@ -1107,7 +1151,7 @@
 <p>En el caso de Traefik el contenedor de traefik hace las funciones de cliente ACME y no se necesita usar el cliente Certbot. Y todoa la configuración se puede realizar en el fichero <code>docker-compose.yml</code>.</p>
 <h3 id="21-lets-encrypt-en-traefik">2.1. Let's Encrypt en Traefik<a class="headerlink" href="#21-lets-encrypt-en-traefik" title="Permanent link">&para;</a></h3>
 <p>Para llegar a la solución final se darán tres pasos usando los ficheros <code>traefik.vxX.yml</code> (v1, v2 y v3).</p>
-<p>En el primer paso se configura traefik, el servicio whoami y SSL. En esta versión whoami sólo es accesible mediante https usando los  certificados proporcionados por <strong>Let's Encrypt</strong>. </p>
+<p>En el primer paso se configura traefik, el servicio whoami y SSL. En esta versión whoami sólo es accesible mediante https usando los  certificados proporcionados por <strong>Let's Encrypt</strong>.</p>
 <p>Primero observe la configuración del servicio <code>traefik</code> donde se han añadido opciones respecto a ejemplos previos en <code>ports</code>, <code>command</code> y <code>volumes</code></p>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">traefik</span><span class="p">:</span>
@@ -1164,7 +1208,7 @@
 <p>La línea comentada <code>--certificatesresolvers.myresolver.acme.caserver</code> apunta al entorno de pruebas de Let's Encrypt. Esto es útil para evitar límites de emisión durante las pruebas.</p>
 </li>
 </ul>
-<p>Tenga en cuenta que el nombre <strong><code>myresolver</code></strong>  que se utiliza en estas opciones sera necesario luego en los servicios. </p>
+<p>Tenga en cuenta que el nombre <strong><code>myresolver</code></strong>  que se utiliza en estas opciones sera necesario luego en los servicios.</p>
 <h4 id="212-puertos-mapeados">2.1.2. Puertos mapeados<a class="headerlink" href="#212-puertos-mapeados" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>443:443</code>: Permite acceso HTTPS desde el exterior.</li>
@@ -1173,10 +1217,10 @@
 <h4 id="213-volumenes">2.1.3. Volúmenes<a class="headerlink" href="#213-volumenes" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>./letsencrypt:/letsencrypt</code>: Persistencia de los datos de Let's Encrypt.  </li>
-<li><code>/var/run/docker.sock:/var/run/docker.sock</code>: Permite a Traefik acceder al socket de Docker para detectar servicios. </li>
+<li><code>/var/run/docker.sock:/var/run/docker.sock</code>: Permite a Traefik acceder al socket de Docker para detectar servicios.</li>
 </ul>
 <h4 id="214-el-servicio-whoami">2.1.4. El servicio whoami<a class="headerlink" href="#214-el-servicio-whoami" title="Permanent link">&para;</a></h4>
-<p>Observe ahora la descripción del servicio <code>whoami</code> en el fichero  <code>traefik.v1.yml</code> </p>
+<p>Observe ahora la descripción del servicio <code>whoami</code> en el fichero  <code>traefik.v1.yml</code></p>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 
 <span class="w">  </span><span class="nt">traefik</span><span class="p">:</span>
@@ -1191,9 +1235,11 @@
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.http.routers.whoami.entrypoints=websecure&quot;</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.http.routers.whoami.tls.certresolver=myresolver&quot;</span>
 </code></pre></div>
-<p>Las <code>labels</code> son la clave para indicarle a Traefik como manejar este servicio. Las primeras son genéricas:
-- <code>traefik.enable=true</code>: Habilita la integración de este servicio con Traefik.
-- <code>traefik.http.routers.whoami.rule=Host(</code>whoami.angoies.tech<code>)</code>: Define una regla de enrutamiento basada en el host. Este servicio responderá a solicitudes dirigidas al dominio <code>whoami.angoies.tech</code>.</p>
+<p>Las <code>labels</code> son la clave para indicarle a Traefik como manejar este servicio. Las primeras son genéricas:</p>
+<ul>
+<li><code>traefik.enable=true</code>: Habilita la integración de este servicio con Traefik.</li>
+<li><code>traefik.http.routers.whoami.rule=Host(</code>whoami.angoies.tech<code>)</code>: Define una regla de enrutamiento basada en el host. Este servicio responderá a solicitudes dirigidas al dominio <code>whoami.angoies.tech</code>.</li>
+</ul>
 <p>Y las últimas son específicas de la configuración HTTPS:</p>
 <ul>
 <li><code>traefik.http.routers.whoami.entrypoints=websecure</code>: Asocia este servicio al punto de entrada HTTPS configurado (<code>websecure</code>).</li>
@@ -1212,13 +1258,13 @@
 <p><strong>Configuración de HTTPS</strong>:</p>
 <ul>
 <li>Cuando un cliente accede a <code>whoami.angoies.tech</code>, Traefik usa el resolvedor <code>myresolver</code> para gestionar el certificado TLS.</li>
-<li>La primera vez que se accede Let's Encrypt valida el dominio mediante un desafío TLS, y si el desafio es superado emite un certificado automáticamente. El certificado se almacena en el fichero <code>acme.json</code> del volumen. En siguintes peticiones basta comprobar que el certificado almaceando sigue siendo válido. </li>
+<li>La primera vez que se accede Let's Encrypt valida el dominio mediante un desafío TLS, y si el desafio es superado emite un certificado automáticamente. El certificado se almacena en el fichero <code>acme.json</code> del volumen. En siguintes peticiones basta comprobar que el certificado almaceando sigue siendo válido.</li>
 </ul>
 </li>
 <li>
 <p><strong>Redirección</strong>:</p>
 <ul>
-<li>Traefik recibe las solicitudes HTTPS en el puerto 443. </li>
+<li>Traefik recibe las solicitudes HTTPS en el puerto 443.</li>
 <li>Según la regla definida (<code>Host</code>) las redirige al contenedor <code>whoami</code>.</li>
 </ul>
 </li>
@@ -1233,8 +1279,8 @@
 <div class="highlight"><pre><span></span><code><span class="go">curl https://whoami.angoies.tech</span>
 </code></pre></div>
 <h2 id="3-anadir-un-servidor-web">3. Añadir un servidor web<a class="headerlink" href="#3-anadir-un-servidor-web" title="Permanent link">&para;</a></h2>
-<p>El segundo salto consite en añadir un segundo servicio a traefik que también use certificados. La configuración puede ampliarse fácilmente añadiendo servicios con etiquetas similares. </p>
-<p>En este caso (v2) se añade el servidor web <code>nginx</code>. </p>
+<p>El segundo salto consite en añadir un segundo servicio a traefik que también use certificados. La configuración puede ampliarse fácilmente añadiendo servicios con etiquetas similares.</p>
+<p>En este caso (v2) se añade el servidor web <code>nginx</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">traefik</span><span class="p">:</span>
 <span class="w">    </span><span class="c1"># omitido</span>
@@ -1251,7 +1297,7 @@
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.http.routers.nginx.entrypoints=websecure&quot;</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;traefik.http.routers.nginx.tls.certresolver=myresolver&quot;</span>
 </code></pre></div>
-<p>Observe que las labels son similares a las del servicio whoami </p>
+<p>Observe que las labels son similares a las del servicio whoami</p>
 <ul>
 <li>se ha usado como nombre de ruta el nombre del servicio: <strong><code>zzz.routers.nginx.xxx=</code></strong></li>
 <li>se mantiene el nombre del resolver: <strong><code>xxx.certresolver=myresolver</code></strong>"</li>
@@ -1277,12 +1323,12 @@
 </li>
 <li>
 <p><strong><code>--entrypoints.web.http.redirections.entrypoint.scheme=https</code></strong></p>
-<p>Esta opción complementa la anterior al especificar que el esquema utilizado en la redirección será <strong>HTTPS</strong>. 
-- El esquema (<code>http</code> o <code>https</code>) define cómo se debe construir la nueva URL para el cliente redirigido.
-- En este caso, cualquier solicitud HTTP redirigida incluirá automáticamente <code>https://</code> en lugar de <code>http://</code> en la URL resultante.</p>
+<p>Esta opción complementa la anterior al especificar que el esquema utilizado en la redirección será <strong>HTTPS</strong>.
+* El esquema (<code>http</code> o <code>https</code>) define cómo se debe construir la nueva URL para el cliente redirigido.
+* En este caso, cualquier solicitud HTTP redirigida incluirá automáticamente <code>https://</code> en lugar de <code>http://</code> en la URL resultante.</p>
 <p>Por ejemplo:
-- Un cliente accede a <code>http://whoami.angoies.tech</code>.
-- Traefik genera una redirección a <code>https://whoami.angoies.tech</code>, cambiando el esquema y preservando el resto de la URL (ruta, parámetros, etc.).</p>
+* Un cliente accede a <code>http://whoami.angoies.tech</code>.
+* Traefik genera una redirección a <code>https://whoami.angoies.tech</code>, cambiando el esquema y preservando el resto de la URL (ruta, parámetros, etc.).</p>
 </li>
 </ol>
 <blockquote>
@@ -1302,10 +1348,10 @@
 <li><strong>Cumplimiento de estándares</strong>:Cumple con mejores prácticas y requisitos como los de SEO (Google prioriza sitios con HTTPS).</li>
 </ol>
 <blockquote>
-<p><strong>Aviso</strong>:  Compruebe que ya exista un entrypoint llamado <code>websecure</code> configurado para manejar el tráfico HTTPS (puerto 443) y asociado a un certificado TLS válido:
+<p><strong>Aviso</strong>:  Compruebe que ya exista un entrypoint llamado <code>websecure</code> configurado para manejar el tráfico HTTPS (puerto 443) y asociado a un certificado TLS válido:</p>
 <div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">--entryPoints.websecure.address=:443</span>
 <span class="l l-Scalar l-Scalar-Plain">--entryPoints.websecure.http.tls=true</span>
-</code></pre></div></p>
+</code></pre></div>
 </blockquote>
 <h3 id="41-prueba">4.1. Prueba<a class="headerlink" href="#41-prueba" title="Permanent link">&para;</a></h3>
 <p>Basta con hacer una petición con el comando <code>curl</code> y probar la conexión HTTPS. <strong>Para poder seguir la redireccion con <code>curl</code></strong> debe usar la opción <code>-L</code>:</p>
@@ -1380,9 +1426,9 @@ curl -L http://whoami.angoies.tech
 <li>Es fundamental que <code>acme.json</code> se mantenga en un volumen persistente (como se define en el YAML con <code>./letsencrypt:/letsencrypt</code>).</li>
 <li>Si el archivo se pierde, Traefik tendrá que reiniciar el proceso de validación desde cero, lo que puede causar interrupciones temporales.</li>
 </ol>
-<p>Para ver las fechas de renovación de los certificados puede ejecutar el comando <code>jq</code>
-<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.myresolver.Certificates[] | &quot;\(.domain.main) \(.certificate)&quot;&#39;</span><span class="w"> </span>acme.json<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>domain<span class="w"> </span>cert<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Dominio: </span><span class="nv">$domain</span><span class="s2">&quot;</span><span class="p">;</span><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cert</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>x509<span class="w"> </span>-noout<span class="w"> </span>-startdate<span class="w"> </span>-enddate<span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;---------------------------&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
-</code></pre></div></p>
+<p>Para ver las fechas de renovación de los certificados puede ejecutar el comando <code>jq</code></p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.myresolver.Certificates[] | &quot;\(.domain.main) \(.certificate)&quot;&#39;</span><span class="w"> </span>acme.json<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>domain<span class="w"> </span>cert<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Dominio: </span><span class="nv">$domain</span><span class="s2">&quot;</span><span class="p">;</span><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cert</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>x509<span class="w"> </span>-noout<span class="w"> </span>-startdate<span class="w"> </span>-enddate<span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;---------------------------&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+</code></pre></div>
 <h4 id="612-importancia-y-buenas-practicas">6.1.2. Importancia y buenas prácticas<a class="headerlink" href="#612-importancia-y-buenas-practicas" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Seguridad</strong>:</li>
